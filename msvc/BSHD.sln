@@ -3,6 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SHD", "SHD\SHD.vcproj", "{2DFBAA00-13B6-49D4-A3ED-BC7AEDF31EAF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SHDTest", "SHDTest\SHDTest.vcproj", "{E30E2600-7FA9-4693-ABF4-4F2CF4C9D91B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2DFBAA00-13B6-49D4-A3ED-BC7AEDF31EAF} = {2DFBAA00-13B6-49D4-A3ED-BC7AEDF31EAF}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +18,10 @@ Global
 		{2DFBAA00-13B6-49D4-A3ED-BC7AEDF31EAF}.Debug|Win32.Build.0 = Debug|Win32
 		{2DFBAA00-13B6-49D4-A3ED-BC7AEDF31EAF}.Release|Win32.ActiveCfg = Release|Win32
 		{2DFBAA00-13B6-49D4-A3ED-BC7AEDF31EAF}.Release|Win32.Build.0 = Release|Win32
+		{E30E2600-7FA9-4693-ABF4-4F2CF4C9D91B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E30E2600-7FA9-4693-ABF4-4F2CF4C9D91B}.Debug|Win32.Build.0 = Debug|Win32
+		{E30E2600-7FA9-4693-ABF4-4F2CF4C9D91B}.Release|Win32.ActiveCfg = Release|Win32
+		{E30E2600-7FA9-4693-ABF4-4F2CF4C9D91B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

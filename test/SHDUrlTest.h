@@ -42,7 +42,7 @@ TEST_F(SHDUrlTest, ParseInvalidUrl)
 		SHDUrl url(_invalid_url);
 		EXPECT_FALSE(true) << "This string shouldn't able to be parsed";
 	}
-	catch (std::runtime_error &e)
+	catch (std::runtime_error &)
 	{
 		EXPECT_TRUE(true);
 	}
