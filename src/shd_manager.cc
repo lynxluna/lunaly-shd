@@ -87,11 +87,9 @@ SHDManagerPrivate::SHDManagerPrivate( const size_t max_queue ) : maximum_queue(m
 		queued_threads.push_back(SHDThread(SHDManagerPrivate::io_service));
 	}
 	
-	std::vector<SHDThread>::iterator it = queued_threads.begin();
-	std::vector<SHDThread>::iterator end = queued_threads.end();
-	for ( ; it != end; ++it )
+	for ( size_t i = 0; i < maximum_queue; ++ i )
 	{
-		it->done.connect(boost::bind(&SHDManagerPrivate::thread_done, this));
+		queued_threads[i].done.connect(boost::bind(&SHDManagerPrivate::thread_done, this));
 	}
 }
 

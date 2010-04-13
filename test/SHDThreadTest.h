@@ -74,8 +74,8 @@ TEST_F( SHDThreadTest, MultiThreadTestQueued )
 	manager.reset();
 	manager.call( _valid_reqs[0], &outfile1 );
 	manager.call( _valid_reqs[1], &outfile2 );
-	//manager.call( _valid_reqs[2], &outfile3 );
-	//manager.call( _valid_reqs[3], &outfile4 );
+	manager.call( _valid_reqs[2], &outfile3 );
+	manager.call( _valid_reqs[3], &outfile4 );
 	manager.call( _valid_reqs[4], &outfile5 );
 	
 	manager.start();
