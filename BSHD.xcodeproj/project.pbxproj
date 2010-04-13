@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 45;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,7 @@
 		6C00704F11742152007F1EB7 /* shd_manager.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6C959A3F1169385D00E33A57 /* shd_manager.cc */; };
 		6C007146117437A3007F1EB7 /* shd_thread.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6C007144117437A3007F1EB7 /* shd_thread.cc */; };
 		6C007147117437A3007F1EB7 /* shd_thread.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C007145117437A3007F1EB7 /* shd_thread.h */; };
+		6C2565BB1174E7F000CE0A79 /* EsCampur.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C2565BA1174E7F000CE0A79 /* EsCampur.mm */; };
 		6C65F94F1173B55500C65A18 /* libboost_signals-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C65F94E1173B55500C65A18 /* libboost_signals-mt.a */; };
 		6CAD1E301169519B00D938C2 /* shdurl.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6CAD1E2F1169519B00D938C2 /* shdurl.cc */; };
 		6CAD1E32116951AF00D938C2 /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CAD1E31116951AF00D938C2 /* common.h */; };
@@ -40,9 +41,13 @@
 
 /* Begin PBXFileReference section */
 		6C006FAC1174101D007F1EB7 /* libglog.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglog.a; path = /usr/local/lib/libglog.a; sourceTree = "<absolute>"; };
-		6C00714311743790007F1EB7 /* SHDThreadTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHDThreadTest.h; path = src/SHDThreadTest.h; sourceTree = "<group>"; };
 		6C007144117437A3007F1EB7 /* shd_thread.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = shd_thread.cc; path = src/shd_thread.cc; sourceTree = "<group>"; };
 		6C007145117437A3007F1EB7 /* shd_thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shd_thread.h; path = src/shd_thread.h; sourceTree = "<group>"; };
+		6C25659A1174B87D00CE0A79 /* EsCampur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EsCampur.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C25659C1174B87D00CE0A79 /* EsCampur-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EsCampur-Info.plist"; sourceTree = "<group>"; };
+		6C2565AE1174E6E600CE0A79 /* SHDThreadTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHDThreadTest.h; path = test/SHDThreadTest.h; sourceTree = "<group>"; };
+		6C2565B91174E7F000CE0A79 /* EsCampur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EsCampur.h; path = src/iphone/EsCampur.h; sourceTree = "<group>"; };
+		6C2565BA1174E7F000CE0A79 /* EsCampur.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = EsCampur.mm; path = src/iphone/EsCampur.mm; sourceTree = "<group>"; };
 		6C65F94E1173B55500C65A18 /* libboost_signals-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_signals-mt.a"; path = "/opt/local/lib/libboost_signals-mt.a"; sourceTree = "<absolute>"; };
 		6C959A3E1169385D00E33A57 /* shd_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shd_manager.h; path = src/shd_manager.h; sourceTree = "<group>"; };
 		6C959A3F1169385D00E33A57 /* shd_manager.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = shd_manager.cc; path = src/shd_manager.cc; sourceTree = "<group>"; };
@@ -67,6 +72,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6C2565981174B87D00CE0A79 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6CAD1E1C1169512400D938C2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -90,9 +102,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C2565951174B85E00CE0A79 /* iPhoneApp */ = {
+			isa = PBXGroup;
+			children = (
+				6C2565B91174E7F000CE0A79 /* EsCampur.h */,
+				6C2565BA1174E7F000CE0A79 /* EsCampur.mm */,
+			);
+			name = iPhoneApp;
+			sourceTree = "<group>";
+		};
 		6C959A291169373100E33A57 = {
 			isa = PBXGroup;
 			children = (
+				6C2565951174B85E00CE0A79 /* iPhoneApp */,
+				6CAD1E171169503F00D938C2 /* SHD */,
 				6CAD1EAA11696BBD00D938C2 /* SHDTest */,
 				6C959A371169377600E33A57 /* Products */,
 				6CAD1F62116973B700D938C2 /* libboost_system-mt.a */,
@@ -102,6 +125,7 @@
 				6C65F94E1173B55500C65A18 /* libboost_signals-mt.a */,
 				6CAD1FC0116978F100D938C2 /* libgtest.a */,
 				6C006FAC1174101D007F1EB7 /* libglog.a */,
+				6C25659C1174B87D00CE0A79 /* EsCampur-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,6 +134,7 @@
 			children = (
 				6CAD1E1E1169512400D938C2 /* libSHD.a */,
 				6CAD1E9311696AEC00D938C2 /* SHDTest */,
+				6C25659A1174B87D00CE0A79 /* EsCampur.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -121,8 +146,8 @@
 				6CAD1E31116951AF00D938C2 /* common.h */,
 				6C959A3E1169385D00E33A57 /* shd_manager.h */,
 				6CC608E5116FFD950079F526 /* shd_request.h */,
-				6CC608E3116FFD950079F526 /* shd_header.h */,
 				6CAD1E4B116953DE00D938C2 /* shdurl.h */,
+				6CC608E3116FFD950079F526 /* shd_header.h */,
 				6CC608DD116FFCA60079F526 /* shd_auth.h */,
 				6CC608E4116FFD950079F526 /* shd_request.cc */,
 				6C959A3F1169385D00E33A57 /* shd_manager.cc */,
@@ -136,10 +161,9 @@
 		6CAD1EAA11696BBD00D938C2 /* SHDTest */ = {
 			isa = PBXGroup;
 			children = (
-				6C00714311743790007F1EB7 /* SHDThreadTest.h */,
+				6C2565AE1174E6E600CE0A79 /* SHDThreadTest.h */,
 				6CC608E1116FFD650079F526 /* SHDRequestTest.h */,
 				6CC608E2116FFD650079F526 /* SHDUrlTest.h */,
-				6CAD1E171169503F00D938C2 /* SHD */,
 				6CAD1EA811696BB400D938C2 /* main_test.cc */,
 			);
 			name = SHDTest;
@@ -165,6 +189,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		6C2565991174B87D00CE0A79 /* EsCampur */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6C25659F1174B87E00CE0A79 /* Build configuration list for PBXNativeTarget "EsCampur" */;
+			buildPhases = (
+				6C2565961174B87D00CE0A79 /* Resources */,
+				6C2565971174B87D00CE0A79 /* Sources */,
+				6C2565981174B87D00CE0A79 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EsCampur;
+			productName = EsCampur;
+			productReference = 6C25659A1174B87D00CE0A79 /* EsCampur.app */;
+			productType = "com.apple.product-type.application";
+		};
 		6CAD1E1D1169512400D938C2 /* SHD */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6CAD1E231169514200D938C2 /* Build configuration list for PBXNativeTarget "SHD" */;
@@ -214,11 +255,30 @@
 			targets = (
 				6CAD1E1D1169512400D938C2 /* SHD */,
 				6CAD1E9211696AEC00D938C2 /* SHDTest */,
+				6C2565991174B87D00CE0A79 /* EsCampur */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		6C2565961174B87D00CE0A79 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		6C2565971174B87D00CE0A79 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C2565BB1174E7F000CE0A79 /* EsCampur.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6CAD1E1B1169512400D938C2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -250,6 +310,55 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		6C25659D1174B87E00CE0A79 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
+				INFOPLIST_FILE = "EsCampur-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = EsCampur;
+				SDKROOT = iphoneos3.1.3;
+			};
+			name = Debug;
+		};
+		6C25659E1174B87E00CE0A79 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
+				INFOPLIST_FILE = "EsCampur-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = EsCampur;
+				SDKROOT = iphoneos3.1.3;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		6C959A2C1169373100E33A57 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -266,7 +375,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DDEBUG";
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+				SDKROOT = macosx10.5;
 			};
 			name = Debug;
 		};
@@ -286,7 +395,7 @@
 					/opt/local/lib,
 				);
 				OTHER_CFLAGS = "-DNDEBUG";
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+				SDKROOT = macosx10.5;
 			};
 			name = Release;
 		};
@@ -387,6 +496,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6C25659F1174B87E00CE0A79 /* Build configuration list for PBXNativeTarget "EsCampur" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6C25659D1174B87E00CE0A79 /* Debug */,
+				6C25659E1174B87E00CE0A79 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6C959A2E1169373100E33A57 /* Build configuration list for PBXProject "BSHD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

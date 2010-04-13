@@ -27,7 +27,9 @@
 #include <list>
 #include <vector>
 
+#if defined(_WIN32) || defined(_WIN64)
 #include "config.h"
+#endif
 #include <glog/logging.h>
 
 #include <boost/asio.hpp>
