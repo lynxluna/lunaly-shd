@@ -46,7 +46,7 @@ SHDUrl::SHDUrl( const std::string &strUrl )
 			{
 				_protocol = matches[1];
 			}
-			catch ( std::exception &e )
+			catch ( std::exception & )
 			{
 				_protocol = "";
 				return;
@@ -56,7 +56,7 @@ SHDUrl::SHDUrl( const std::string &strUrl )
 			{
 				_host	  = matches[2];
 			}
-			catch ( std::exception &e )
+			catch ( std::exception & )
 			{
 				_host = "";
 				return;

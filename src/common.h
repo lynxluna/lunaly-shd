@@ -11,6 +11,11 @@
 #import <Cocoa/Cocoa.h>
 #endif
 
+
+#ifdef _MSC_VER
+#define _WIN32_WINNT 0x500
+#endif
+
 #include <iostream>
 #include <istream>
 #include <ostream>
@@ -21,7 +26,10 @@
 #include <queue>
 #include <list>
 #include <vector>
-#include <ext/hash_map>
+
+#include "config.h"
+#include <glog/logging.h>
+
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
 #include <boost/regex.hpp>
@@ -34,4 +42,5 @@
 #include <boost/function.hpp>
 #include <boost/cstdint.hpp>
 #include <boost/signal.hpp>
-#include <glog/logging.h>
+
+

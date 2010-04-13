@@ -43,10 +43,8 @@ private:
 };
 
 SHDThread::SHDThread( boost::asio::io_service &io_service )
-: d_ptr( new SHDThreadPrivate( this, io_service ) )
-
 {
-	
+	d_ptr = boost::shared_ptr<SHDThreadPrivate>(new SHDThreadPrivate( this, io_service ));
 }
 
 SHDThread::SHDThread ( const SHDThread &other ) : d_ptr(other.d_ptr)
@@ -232,7 +230,7 @@ void SHDThreadPrivate::handle_read_headers(const boost::system::error_code& err)
 		
 		if (output != 0 )
 		{
-			const ssize_t csize = _resp.size();
+			const size_t csize = _resp.size();
 			if ( csize > 0 )
 			{
 				char *buf = new char[ csize + 1 ];
@@ -262,7 +260,7 @@ void SHDThreadPrivate::handle_read_content(const boost::system::error_code& err)
 	static char buf[ 1024 ];
     if (!err)
     {
-		const ssize_t csize = _cont.size();
+		const size_t csize = _cont.size();
 		if ( csize > 0 )
 		{
 			std::istream contstream( &_cont );

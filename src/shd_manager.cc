@@ -61,7 +61,7 @@ void SHDManager::start()
 
 SHDManagerPrivate::SHDManagerPrivate( const size_t max_queue ) : maximum_queue(max_queue)
 {
-	for ( int i = 0; i < maximum_queue; ++ i )
+	for ( size_t i = 0; i < maximum_queue; ++ i )
 	{
 		queued_threads.push_back(SHDThread(SHDManagerPrivate::io_service));
 	}

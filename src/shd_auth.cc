@@ -6,6 +6,5 @@
  *  Copyright 2010 MijiX Gemilang Persada. All rights reserved.
  *
  */
-
+#include "common.h"
 #include "shd_auth.h"
-
