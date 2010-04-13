@@ -14,5 +14,9 @@ build
 *.dylib
 *.so
 BuildLog.htm
-*\Debug\*
-*\Release\*
+*/Debug/*
+*/Release/*
+*.res
+*.embed.manifest
+*.intermediate.manifest
+*.dep
