@@ -32,6 +32,8 @@ public:
 	std::vector<SHDThread>::iterator find_spare_queued_thread();
 	std::vector<SHDThread>::iterator find_spare_immediate_thread();
 	
+	void thread_done();
+	
 };
 
 boost::asio::io_service SHDManagerPrivate::io_service;
@@ -57,6 +59,25 @@ void SHDManager::start()
 {
 	d_ptr->io_service.run();
 }
+
+void SHDManager::reset()
+{
+	d_ptr->io_service.reset();
+}
+
+void SHDManagerPrivate::thread_done()
+{
+	std::vector<SHDThread>::iterator ith= find_spare_queued_thread();
+	
+	if (ith != queued_threads.end())
+	{
+		const std::pair<SHDRequest, std::ostream*> reqpair = queued_req.back();
+		DLOG(INFO) << "A queued thread done doing its thingies"
+		           << "It is time for " << reqpair.first.url() << " to rock";
+		ith->call( reqpair.first, reqpair.second );
+		queued_req.pop_back();
+	}
+}
 															
 
 SHDManagerPrivate::SHDManagerPrivate( const size_t max_queue ) : maximum_queue(max_queue)
@@ -64,6 +85,13 @@ SHDManagerPrivate::SHDManagerPrivate( const size_t max_queue ) : maximum_queue(m
 	for ( size_t i = 0; i < maximum_queue; ++ i )
 	{
 		queued_threads.push_back(SHDThread(SHDManagerPrivate::io_service));
+	}
+	
+	std::vector<SHDThread>::iterator it = queued_threads.begin();
+	std::vector<SHDThread>::iterator end = queued_threads.end();
+	for ( ; it != end; ++it )
+	{
+		it->done.connect(boost::bind(&SHDManagerPrivate::thread_done, this));
 	}
 }
 
