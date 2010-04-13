@@ -216,7 +216,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>6C5E4FC81174A99D00756427</string>
+						<string>6C5E4FE31174ABF200756427</string>
 						<key>history</key>
 						<array>
 							<string>6C5E4F581174983900756427</string>
@@ -372,13 +372,12 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>6C5E4FC51174A99D00756427</string>
+										<string>6C5E4FE21174ABF200756427</string>
 										<key>history</key>
 										<array>
 											<string>6CBB9FE7116D239B00C860C8</string>
 											<string>6C65FA3B1173CCE700C65A18</string>
 											<string>6C00710A11742EC6007F1EB7</string>
-											<string>6C5E4FB51174A99D00756427</string>
 											<string>6C5E4FB61174A99D00756427</string>
 											<string>6C5E4FB71174A99D00756427</string>
 											<string>6C5E4FB81174A99D00756427</string>
@@ -392,8 +391,9 @@
 											<string>6C5E4FC01174A99D00756427</string>
 											<string>6C5E4FC11174A99D00756427</string>
 											<string>6C5E4FC21174A99D00756427</string>
-											<string>6C5E4FC31174A99D00756427</string>
-											<string>6C5E4FC41174A99D00756427</string>
+											<string>6C5E4FDF1174ABF200756427</string>
+											<string>6C5E4FE01174ABF200756427</string>
+											<string>6C5E4FE11174ABF200756427</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -595,11 +595,11 @@
 		<string>6C5E4FC91174A99D00756427</string>
 		<string>6C5E4FCA1174A99D00756427</string>
 		<string>1CD10A99069EF8BA00B06720</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>6CAD1D2A11693A4E00D938C2</string>
 		<string>6C5E4F4F1174981F00756427</string>
 		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>/Users/lynxluna/Projects/BSHD/BSHD.xcodeproj</string>
-		<string>1C78EAAD065D492600B07095</string>
 	</array>
 	<key>WindowString</key>
 	<string>0 59 1280 719 0 0 1280 778 </string>
@@ -973,7 +973,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>
