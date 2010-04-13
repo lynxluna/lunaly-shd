@@ -10,6 +10,7 @@
 #include "shdurl.h"
 #include "shd_request.h"
 #include "shd_thread.h"
+#include <boost/lexical_cast.hpp>
 
 class SHDThreadPrivate
 {
@@ -31,6 +32,7 @@ private:
 	boost::asio::streambuf _cont;
 	
 	size_t _fsize;
+	size_t _consumed;
 	
 	void handle_resolve( const boost::system::error_code &e, boost::asio::ip::tcp::resolver::iterator endpoint_iter );
 	void handle_connect( const boost::system::error_code &e, boost::asio::ip::tcp::resolver::iterator endpoint_iter );
@@ -77,7 +79,7 @@ SHDRequest SHDThread::request() const
 }
 
 SHDThreadPrivate::SHDThreadPrivate( SHDThread *parent, boost::asio::io_service &io_service )
-:output(0), q_ptr( parent ), _resolver(io_service), _sock(io_service), _fsize(0), in_progress(false)
+:output(0),  in_progress(false), q_ptr( parent ), _resolver(io_service), _sock(io_service), _fsize(-1), _consumed(0)
 {
 	
 }
@@ -197,6 +199,33 @@ void SHDThreadPrivate::handle_read_headers(const boost::system::error_code& err)
 		while (std::getline(response_stream, header) && header != "\r")
 		{
 			DLOG(INFO) << header << "\n";
+			
+			const size_t hpos = header.find_first_of(':');
+			std::pair<std::string,std::string> hdrpair;
+			if ( hpos != std::string::npos )
+			{
+				hdrpair.first = header.substr(0, hpos);
+				hdrpair.second = header.substr(hpos+1);
+				boost::trim(hdrpair.second);
+			}
+			
+			switch ( tolower(header[0]) )
+			{
+			case 'c':
+				if (boost::iequals(hdrpair.first, "content-length"))
+				{
+					try
+					{
+						_fsize = boost::lexical_cast<size_t>(hdrpair.second);
+					}
+					catch (boost::bad_lexical_cast &)
+					{
+						_fsize = -1;
+					}
+				}
+			}
+						
+			
 		}
 		
 		DLOG(INFO) << "\n";
@@ -210,6 +239,7 @@ void SHDThreadPrivate::handle_read_headers(const boost::system::error_code& err)
 				std::istream contstream( &_resp );
 				contstream.readsome(buf, csize);
 				output->write(buf, csize);
+				_consumed = csize;
 				delete [] buf;
 			}
 		
@@ -236,10 +266,11 @@ void SHDThreadPrivate::handle_read_content(const boost::system::error_code& err)
 		if ( csize > 0 )
 		{
 			std::istream contstream( &_cont );
+			const size_t write_size = (csize >= 1024 ? 1024 : csize);
 			
 			contstream.readsome(buf, 1024);
-			output->write(buf, csize >= 1024 ? 1024 : csize );
-			DLOG(INFO) << reqsource.url() << " -- writing (" << (csize >= 1024 ? 1024 : csize) << " bytes) \n";
+			output->write(buf, write_size );
+			DLOG(INFO) << reqsource.url() << " -- writing (" << write_size << " of " << _fsize << " bytes) \n";
 		}
 		// Continue reading remaining data until EOF.
 		boost::asio::async_read(_sock, _cont,
@@ -253,6 +284,8 @@ void SHDThreadPrivate::handle_read_content(const boost::system::error_code& err)
 		q_ptr->done();
 		in_progress = false;
 		output = 0;
+		_fsize = -1;
+		_consumed = 0;
 	}
     else if (err != boost::asio::error::eof)
     {
