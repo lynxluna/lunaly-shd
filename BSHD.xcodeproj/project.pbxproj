@@ -94,14 +94,13 @@
 			isa = PBXGroup;
 			children = (
 				6CAD1EAA11696BBD00D938C2 /* SHDTest */,
-				6CAD1E171169503F00D938C2 /* SHD */,
 				6C959A371169377600E33A57 /* Products */,
 				6CAD1F62116973B700D938C2 /* libboost_system-mt.a */,
 				6CAD1F64116973B700D938C2 /* libboost_thread-mt.a */,
 				6CAD1F66116973B700D938C2 /* libboost_unit_test_framework-mt.a */,
 				6CAD1F711169741600D938C2 /* libboost_regex-mt.a */,
-				6CAD1FC0116978F100D938C2 /* libgtest.a */,
 				6C65F94E1173B55500C65A18 /* libboost_signals-mt.a */,
+				6CAD1FC0116978F100D938C2 /* libgtest.a */,
 				6C006FAC1174101D007F1EB7 /* libglog.a */,
 			);
 			sourceTree = "<group>";
@@ -118,17 +117,17 @@
 		6CAD1E171169503F00D938C2 /* SHD */ = {
 			isa = PBXGroup;
 			children = (
-				6C007144117437A3007F1EB7 /* shd_thread.cc */,
 				6C007145117437A3007F1EB7 /* shd_thread.h */,
 				6CAD1E31116951AF00D938C2 /* common.h */,
 				6C959A3E1169385D00E33A57 /* shd_manager.h */,
-				6CC608E4116FFD950079F526 /* shd_request.cc */,
 				6CC608E5116FFD950079F526 /* shd_request.h */,
 				6CC608E3116FFD950079F526 /* shd_header.h */,
-				6C959A3F1169385D00E33A57 /* shd_manager.cc */,
-				6CAD1E2F1169519B00D938C2 /* shdurl.cc */,
 				6CAD1E4B116953DE00D938C2 /* shdurl.h */,
 				6CC608DD116FFCA60079F526 /* shd_auth.h */,
+				6CC608E4116FFD950079F526 /* shd_request.cc */,
+				6C959A3F1169385D00E33A57 /* shd_manager.cc */,
+				6CAD1E2F1169519B00D938C2 /* shdurl.cc */,
+				6C007144117437A3007F1EB7 /* shd_thread.cc */,
 				6CC608DE116FFCA60079F526 /* shd_auth.cc */,
 			);
 			name = SHD;
@@ -140,6 +139,7 @@
 				6C00714311743790007F1EB7 /* SHDThreadTest.h */,
 				6CC608E1116FFD650079F526 /* SHDRequestTest.h */,
 				6CC608E2116FFD650079F526 /* SHDUrlTest.h */,
+				6CAD1E171169503F00D938C2 /* SHD */,
 				6CAD1EA811696BB400D938C2 /* main_test.cc */,
 			);
 			name = SHDTest;

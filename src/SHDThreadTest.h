@@ -40,12 +40,13 @@ TEST_F( SHDThreadTest, RequestTest )
 	outfile3.close();
 }
 */
+
 TEST_F( SHDThreadTest, MultiThreadTestImmediate )
 {
-	io.reset();
-	std::ofstream outfile1("/tmp/madness1.jpg", std::ofstream::binary );
-	std::ofstream outfile2("/tmp/madness2.jpg", std::ofstream::binary );
-	std::ofstream outfile3("/tmp/madness3.jpg", std::ofstream::binary );
+
+	std::ofstream outfile1("/tmp/madness_alto1.jpg", std::ofstream::binary );
+	std::ofstream outfile2("/tmp/madness_alto2.jpg", std::ofstream::binary );
+	std::ofstream outfile3("/tmp/madness_alto3.jpg", std::ofstream::binary );
 	
 	SHDManager manager;
 	manager.call( _valid_reqs[0], &std::cout, false );
@@ -53,7 +54,7 @@ TEST_F( SHDThreadTest, MultiThreadTestImmediate )
 	manager.call( _valid_reqs[2], &outfile2, false );
 	manager.call( _valid_reqs[3], &outfile3, false );
 	
-	io.run();
+	manager.start();
 	outfile1.close();
 	outfile2.close();
 	outfile3.close();

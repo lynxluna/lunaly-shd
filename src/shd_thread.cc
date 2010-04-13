@@ -20,6 +20,7 @@ public:
 	std::ostream *output;
 	SHDRequest reqsource;
 	bool in_progress;
+	void move_parent( SHDThread *parent );
 private:
 	SHDThread * q_ptr;
 	
@@ -48,11 +49,13 @@ SHDThread::SHDThread( boost::asio::io_service &io_service )
 
 SHDThread::SHDThread ( const SHDThread &other ) : d_ptr(other.d_ptr)
 {
+	d_ptr->move_parent( this );
 }
 
 SHDThread& SHDThread::operator=( const SHDThread &other )
 {
 	d_ptr = other.d_ptr;
+	d_ptr->move_parent( this );
 	return *this;
 }
 
@@ -79,6 +82,10 @@ SHDThreadPrivate::SHDThreadPrivate( SHDThread *parent, boost::asio::io_service &
 	
 }
 
+void SHDThreadPrivate::move_parent( SHDThread *parent )
+{
+	q_ptr = parent;
+}
 void SHDThreadPrivate::call( const SHDRequest &req )
 {
 	SHDRequest nreq(req);
@@ -232,7 +239,7 @@ void SHDThreadPrivate::handle_read_content(const boost::system::error_code& err)
 			
 			contstream.readsome(buf, 1024);
 			output->write(buf, csize >= 1024 ? 1024 : csize );
-			DLOG(INFO) << reqsource.url() << " -- writing\n";
+			DLOG(INFO) << reqsource.url() << " -- writing (" << (csize >= 1024 ? 1024 : csize) << " bytes) \n";
 		}
 		// Continue reading remaining data until EOF.
 		boost::asio::async_read(_sock, _cont,
@@ -242,9 +249,10 @@ void SHDThreadPrivate::handle_read_content(const boost::system::error_code& err)
     }
 	else if( err == boost::asio::error::eof )
 	{
-		q_ptr->done();
 		DLOG(INFO) << reqsource.url() << " -- done\n";
+		q_ptr->done();
 		in_progress = false;
+		output = 0;
 	}
     else if (err != boost::asio::error::eof)
     {

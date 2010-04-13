@@ -31,6 +31,7 @@ public:
 	
 	std::vector<SHDThread>::iterator find_spare_queued_thread();
 	std::vector<SHDThread>::iterator find_spare_immediate_thread();
+	
 };
 
 boost::asio::io_service SHDManagerPrivate::io_service;
@@ -50,6 +51,11 @@ void SHDManager::call( const SHDRequest &req, std::ostream *outp, bool queued)
 		d_ptr->add_immediate_call( req, outp );
 	}
 
+}
+
+void SHDManager::start()
+{
+	d_ptr->io_service.run();
 }
 															
 
@@ -77,7 +83,7 @@ void SHDManagerPrivate::add_queued_call( const SHDRequest &req, std::ostream *ou
 
 void SHDManagerPrivate::add_immediate_call( const SHDRequest &req, std::ostream *outp )
 {
-	std::vector<SHDThread>::iterator ith= find_spare_immediate_thread();
+	std::vector<SHDThread>::iterator ith = find_spare_immediate_thread();
 	if ( ith == immediate_threads.end())
 	{
 		immediate_threads.push_back(SHDThread(SHDManagerPrivate::io_service));
