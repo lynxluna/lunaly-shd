@@ -269,7 +269,7 @@ void SHDThreadPrivate::handle_read_content(const boost::system::error_code& err)
 			contstream.readsome(buf, 1024);
 			output->write(buf, write_size );
 			_consumed += write_size;
-			DLOG(INFO) << reqsource.url() << " -- writing (" << _consumed << " of " << _fsize << " bytes) \n";
+			// DLOG(INFO) << reqsource.url() << " -- writing (" << _consumed << " of " << _fsize << " bytes) \n";
 			if (_fsize != -1)
 			{
 				q_ptr->progress( _consumed, _fsize );
@@ -289,6 +289,7 @@ void SHDThreadPrivate::handle_read_content(const boost::system::error_code& err)
 		output = 0;
 		_fsize = -1;
 		_consumed = 0;
+		_sock.close();
 	}
     else if (err != boost::asio::error::eof)
     {

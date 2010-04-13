@@ -69,9 +69,9 @@ void SHDManagerPrivate::thread_done()
 {
 	std::vector<SHDThread>::iterator ith= find_spare_queued_thread();
 	
-	if (ith != queued_threads.end())
+	if (ith != queued_threads.end() && queued_req.size() > 0 )
 	{
-		const std::pair<SHDRequest, std::ostream*> reqpair = queued_req.back();
+		const std::pair<SHDRequest, std::ostream*> &reqpair = queued_req.back();
 		DLOG(INFO) << "A queued thread done doing its thingies"
 		           << "It is time for " << reqpair.first.url() << " to rock";
 		ith->call( reqpair.first, reqpair.second );
