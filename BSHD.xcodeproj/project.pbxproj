@@ -1,0 +1,420 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6C006FCA1174132B007F1EB7 /* libglog.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C006FAC1174101D007F1EB7 /* libglog.a */; };
+		6C00704F11742152007F1EB7 /* shd_manager.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6C959A3F1169385D00E33A57 /* shd_manager.cc */; };
+		6C007146117437A3007F1EB7 /* shd_thread.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6C007144117437A3007F1EB7 /* shd_thread.cc */; };
+		6C007147117437A3007F1EB7 /* shd_thread.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C007145117437A3007F1EB7 /* shd_thread.h */; };
+		6C65F94F1173B55500C65A18 /* libboost_signals-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C65F94E1173B55500C65A18 /* libboost_signals-mt.a */; };
+		6CAD1E301169519B00D938C2 /* shdurl.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6CAD1E2F1169519B00D938C2 /* shdurl.cc */; };
+		6CAD1E32116951AF00D938C2 /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CAD1E31116951AF00D938C2 /* common.h */; };
+		6CAD1E4C116953DE00D938C2 /* shdurl.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CAD1E4B116953DE00D938C2 /* shdurl.h */; };
+		6CAD1EA911696BB400D938C2 /* main_test.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6CAD1EA811696BB400D938C2 /* main_test.cc */; };
+		6CAD1F7E1169744100D938C2 /* libSHD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CAD1E1E1169512400D938C2 /* libSHD.a */; };
+		6CAD1FC1116978F100D938C2 /* libgtest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CAD1FC0116978F100D938C2 /* libgtest.a */; };
+		6CAD1FC71169792A00D938C2 /* libboost_regex-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CAD1F711169741600D938C2 /* libboost_regex-mt.a */; };
+		6CAD1FC81169792A00D938C2 /* libboost_system-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CAD1F62116973B700D938C2 /* libboost_system-mt.a */; };
+		6CC608DF116FFCA60079F526 /* shd_auth.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CC608DD116FFCA60079F526 /* shd_auth.h */; };
+		6CC608E0116FFCA60079F526 /* shd_auth.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6CC608DE116FFCA60079F526 /* shd_auth.cc */; };
+		6CC608E6116FFD950079F526 /* shd_header.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CC608E3116FFD950079F526 /* shd_header.h */; };
+		6CC608E7116FFD950079F526 /* shd_request.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6CC608E4116FFD950079F526 /* shd_request.cc */; };
+		6CC608E8116FFD950079F526 /* shd_request.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CC608E5116FFD950079F526 /* shd_request.h */; };
+		6CC608E9116FFDA60079F526 /* shd_request.cc in Headers */ = {isa = PBXBuildFile; fileRef = 6CC608E4116FFD950079F526 /* shd_request.cc */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6CAD1F9F1169754900D938C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6C959A2B1169373100E33A57 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6CAD1E1D1169512400D938C2;
+			remoteInfo = SHD;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6C006FAC1174101D007F1EB7 /* libglog.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglog.a; path = /usr/local/lib/libglog.a; sourceTree = "<absolute>"; };
+		6C00714311743790007F1EB7 /* SHDThreadTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHDThreadTest.h; path = src/SHDThreadTest.h; sourceTree = "<group>"; };
+		6C007144117437A3007F1EB7 /* shd_thread.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = shd_thread.cc; path = src/shd_thread.cc; sourceTree = "<group>"; };
+		6C007145117437A3007F1EB7 /* shd_thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shd_thread.h; path = src/shd_thread.h; sourceTree = "<group>"; };
+		6C65F94E1173B55500C65A18 /* libboost_signals-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_signals-mt.a"; path = "/opt/local/lib/libboost_signals-mt.a"; sourceTree = "<absolute>"; };
+		6C959A3E1169385D00E33A57 /* shd_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shd_manager.h; path = src/shd_manager.h; sourceTree = "<group>"; };
+		6C959A3F1169385D00E33A57 /* shd_manager.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = shd_manager.cc; path = src/shd_manager.cc; sourceTree = "<group>"; };
+		6CAD1E1E1169512400D938C2 /* libSHD.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSHD.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CAD1E2F1169519B00D938C2 /* shdurl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = shdurl.cc; path = src/shdurl.cc; sourceTree = "<group>"; };
+		6CAD1E31116951AF00D938C2 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = common.h; path = src/common.h; sourceTree = "<group>"; };
+		6CAD1E4B116953DE00D938C2 /* shdurl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shdurl.h; path = src/shdurl.h; sourceTree = "<group>"; };
+		6CAD1E9311696AEC00D938C2 /* SHDTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SHDTest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CAD1EA811696BB400D938C2 /* main_test.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main_test.cc; path = test/main_test.cc; sourceTree = "<group>"; };
+		6CAD1F62116973B700D938C2 /* libboost_system-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_system-mt.a"; path = "/opt/local/lib/libboost_system-mt.a"; sourceTree = "<absolute>"; };
+		6CAD1F64116973B700D938C2 /* libboost_thread-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_thread-mt.a"; path = "/opt/local/lib/libboost_thread-mt.a"; sourceTree = "<absolute>"; };
+		6CAD1F66116973B700D938C2 /* libboost_unit_test_framework-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_unit_test_framework-mt.a"; path = "/opt/local/lib/libboost_unit_test_framework-mt.a"; sourceTree = "<absolute>"; };
+		6CAD1F711169741600D938C2 /* libboost_regex-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_regex-mt.a"; path = "/opt/local/lib/libboost_regex-mt.a"; sourceTree = "<absolute>"; };
+		6CAD1FC0116978F100D938C2 /* libgtest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgtest.a; path = /opt/local/lib/libgtest.a; sourceTree = "<absolute>"; };
+		6CC608DD116FFCA60079F526 /* shd_auth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shd_auth.h; path = src/shd_auth.h; sourceTree = "<group>"; };
+		6CC608DE116FFCA60079F526 /* shd_auth.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = shd_auth.cc; path = src/shd_auth.cc; sourceTree = "<group>"; };
+		6CC608E1116FFD650079F526 /* SHDRequestTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHDRequestTest.h; path = test/SHDRequestTest.h; sourceTree = "<group>"; };
+		6CC608E2116FFD650079F526 /* SHDUrlTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHDUrlTest.h; path = test/SHDUrlTest.h; sourceTree = "<group>"; };
+		6CC608E3116FFD950079F526 /* shd_header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shd_header.h; path = src/shd_header.h; sourceTree = "<group>"; };
+		6CC608E4116FFD950079F526 /* shd_request.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = shd_request.cc; path = src/shd_request.cc; sourceTree = "<group>"; };
+		6CC608E5116FFD950079F526 /* shd_request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shd_request.h; path = src/shd_request.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6CAD1E1C1169512400D938C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CAD1E9111696AEC00D938C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CAD1F7E1169744100D938C2 /* libSHD.a in Frameworks */,
+				6CAD1FC1116978F100D938C2 /* libgtest.a in Frameworks */,
+				6CAD1FC71169792A00D938C2 /* libboost_regex-mt.a in Frameworks */,
+				6CAD1FC81169792A00D938C2 /* libboost_system-mt.a in Frameworks */,
+				6C65F94F1173B55500C65A18 /* libboost_signals-mt.a in Frameworks */,
+				6C006FCA1174132B007F1EB7 /* libglog.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6C959A291169373100E33A57 = {
+			isa = PBXGroup;
+			children = (
+				6CAD1EAA11696BBD00D938C2 /* SHDTest */,
+				6CAD1E171169503F00D938C2 /* SHD */,
+				6C959A371169377600E33A57 /* Products */,
+				6CAD1F62116973B700D938C2 /* libboost_system-mt.a */,
+				6CAD1F64116973B700D938C2 /* libboost_thread-mt.a */,
+				6CAD1F66116973B700D938C2 /* libboost_unit_test_framework-mt.a */,
+				6CAD1F711169741600D938C2 /* libboost_regex-mt.a */,
+				6CAD1FC0116978F100D938C2 /* libgtest.a */,
+				6C65F94E1173B55500C65A18 /* libboost_signals-mt.a */,
+				6C006FAC1174101D007F1EB7 /* libglog.a */,
+			);
+			sourceTree = "<group>";
+		};
+		6C959A371169377600E33A57 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6CAD1E1E1169512400D938C2 /* libSHD.a */,
+				6CAD1E9311696AEC00D938C2 /* SHDTest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6CAD1E171169503F00D938C2 /* SHD */ = {
+			isa = PBXGroup;
+			children = (
+				6C007144117437A3007F1EB7 /* shd_thread.cc */,
+				6C007145117437A3007F1EB7 /* shd_thread.h */,
+				6CAD1E31116951AF00D938C2 /* common.h */,
+				6C959A3E1169385D00E33A57 /* shd_manager.h */,
+				6CC608E4116FFD950079F526 /* shd_request.cc */,
+				6CC608E5116FFD950079F526 /* shd_request.h */,
+				6CC608E3116FFD950079F526 /* shd_header.h */,
+				6C959A3F1169385D00E33A57 /* shd_manager.cc */,
+				6CAD1E2F1169519B00D938C2 /* shdurl.cc */,
+				6CAD1E4B116953DE00D938C2 /* shdurl.h */,
+				6CC608DD116FFCA60079F526 /* shd_auth.h */,
+				6CC608DE116FFCA60079F526 /* shd_auth.cc */,
+			);
+			name = SHD;
+			sourceTree = "<group>";
+		};
+		6CAD1EAA11696BBD00D938C2 /* SHDTest */ = {
+			isa = PBXGroup;
+			children = (
+				6C00714311743790007F1EB7 /* SHDThreadTest.h */,
+				6CC608E1116FFD650079F526 /* SHDRequestTest.h */,
+				6CC608E2116FFD650079F526 /* SHDUrlTest.h */,
+				6CAD1EA811696BB400D938C2 /* main_test.cc */,
+			);
+			name = SHDTest;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		6CAD1E1A1169512400D938C2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CAD1E32116951AF00D938C2 /* common.h in Headers */,
+				6CAD1E4C116953DE00D938C2 /* shdurl.h in Headers */,
+				6CC608DF116FFCA60079F526 /* shd_auth.h in Headers */,
+				6CC608E6116FFD950079F526 /* shd_header.h in Headers */,
+				6CC608E9116FFDA60079F526 /* shd_request.cc in Headers */,
+				6CC608E8116FFD950079F526 /* shd_request.h in Headers */,
+				6C007147117437A3007F1EB7 /* shd_thread.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		6CAD1E1D1169512400D938C2 /* SHD */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CAD1E231169514200D938C2 /* Build configuration list for PBXNativeTarget "SHD" */;
+			buildPhases = (
+				6CAD1E1A1169512400D938C2 /* Headers */,
+				6CAD1E1B1169512400D938C2 /* Sources */,
+				6CAD1E1C1169512400D938C2 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SHD;
+			productName = libSHD;
+			productReference = 6CAD1E1E1169512400D938C2 /* libSHD.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		6CAD1E9211696AEC00D938C2 /* SHDTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CAD1E9911696B1100D938C2 /* Build configuration list for PBXNativeTarget "SHDTest" */;
+			buildPhases = (
+				6CAD1E9011696AEC00D938C2 /* Sources */,
+				6CAD1E9111696AEC00D938C2 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6CAD1FA01169754900D938C2 /* PBXTargetDependency */,
+			);
+			name = SHDTest;
+			productName = SHDTest;
+			productReference = 6CAD1E9311696AEC00D938C2 /* SHDTest */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6C959A2B1169373100E33A57 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 6C959A2E1169373100E33A57 /* Build configuration list for PBXProject "BSHD" */;
+			compatibilityVersion = "Xcode 2.4";
+			hasScannedForEncodings = 0;
+			mainGroup = 6C959A291169373100E33A57;
+			productRefGroup = 6C959A371169377600E33A57 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6CAD1E1D1169512400D938C2 /* SHD */,
+				6CAD1E9211696AEC00D938C2 /* SHDTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6CAD1E1B1169512400D938C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C00704F11742152007F1EB7 /* shd_manager.cc in Sources */,
+				6CAD1E301169519B00D938C2 /* shdurl.cc in Sources */,
+				6CC608E0116FFCA60079F526 /* shd_auth.cc in Sources */,
+				6CC608E7116FFD950079F526 /* shd_request.cc in Sources */,
+				6C007146117437A3007F1EB7 /* shd_thread.cc in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CAD1E9011696AEC00D938C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CAD1EA911696BB400D938C2 /* main_test.cc in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6CAD1FA01169754900D938C2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6CAD1E1D1169512400D938C2 /* SHD */;
+			targetProxy = 6CAD1F9F1169754900D938C2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		6C959A2C1169373100E33A57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/opt/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/opt/local/lib,
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-DDEBUG";
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+			};
+			name = Debug;
+		};
+		6C959A2D1169373100E33A57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				COPY_PHASE_STRIP = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/opt/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/opt/local/lib,
+				);
+				OTHER_CFLAGS = "-DNDEBUG";
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+			};
+			name = Release;
+		};
+		6CAD1E1F1169512400D938C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = src/common.h;
+				INSTALL_PATH = /usr/local/lib;
+				PREBINDING = NO;
+				PRODUCT_NAME = SHD;
+			};
+			name = Debug;
+		};
+		6CAD1E201169512400D938C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = src/common.h;
+				INSTALL_PATH = /usr/local/lib;
+				PREBINDING = NO;
+				PRODUCT_NAME = SHD;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		6CAD1E9511696AED00D938C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = src/common.h;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					../src,
+					/opt/local/include,
+				);
+				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/local/lib,
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				PRODUCT_NAME = SHDTest;
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Debug;
+		};
+		6CAD1E9611696AED00D938C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = src/common.h;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					../src,
+					/opt/local/include,
+				);
+				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/local/lib,
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				PREBINDING = NO;
+				PRODUCT_NAME = SHDTest;
+				VALID_ARCHS = "i386 x86_64";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6C959A2E1169373100E33A57 /* Build configuration list for PBXProject "BSHD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6C959A2C1169373100E33A57 /* Debug */,
+				6C959A2D1169373100E33A57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6CAD1E231169514200D938C2 /* Build configuration list for PBXNativeTarget "SHD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CAD1E1F1169512400D938C2 /* Debug */,
+				6CAD1E201169512400D938C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6CAD1E9911696B1100D938C2 /* Build configuration list for PBXNativeTarget "SHDTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CAD1E9511696AED00D938C2 /* Debug */,
+				6CAD1E9611696AED00D938C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6C959A2B1169373100E33A57 /* Project object */;
+}
