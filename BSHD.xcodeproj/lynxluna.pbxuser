@@ -15,47 +15,33 @@
 			sepNavVisRange = "{0, 607}";
 		};
 	};
-	6C2565991174B87D00CE0A79 /* EsCampur */ = {
-		activeExec = 0;
-		executables = (
-			6C25659B1174B87D00CE0A79 /* EsCampur */,
-		);
-	};
-	6C25659B1174B87D00CE0A79 /* EsCampur */ = {
-		isa = PBXExecutable;
-		activeArgIndices = (
-		);
-		argumentStrings = (
-		);
-		autoAttachOnCrash = 1;
-		breakpointsEnabled = 0;
-		configStateDict = {
+	6C2565AE1174E6E600CE0A79 /* SHDThreadTest.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1011, 793}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 1325}";
 		};
-		customDataFormattersEnabled = 1;
-		dataTipCustomDataFormattersEnabled = 1;
-		dataTipShowTypeColumn = 1;
-		dataTipSortType = 0;
-		debuggerPlugin = GDBDebugging;
-		disassemblyDisplayState = 0;
-		enableDebugStr = 1;
-		environmentEntries = (
-		);
-		executableSystemSymbolLevel = 0;
-		executableUserSymbolLevel = 0;
-		libgmallocEnabled = 0;
-		name = EsCampur;
-		showTypeColumn = 0;
-		sourceDirectories = (
-		);
 	};
 	6C2565B91174E7F000CE0A79 /* EsCampur.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = EsCampur.h;
+		path = /Users/lynxluna/Projects/BSHD/src/iphone/EsCampur.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1011, 507}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1011, 503}}";
 			sepNavSelRange = "{0, 0}";
 			sepNavVisRange = "{0, 204}";
 		};
 	};
 	6C2565BA1174E7F000CE0A79 /* EsCampur.mm */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.cpp.objcpp;
+		name = EsCampur.mm;
+		path = /Users/lynxluna/Projects/BSHD/src/iphone/EsCampur.mm;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1011, 507}}";
 			sepNavSelRange = "{0, 0}";
@@ -190,7 +176,7 @@
 		ignoreCount = 0;
 		lineNumber = 203;
 		location = SHDTest;
-		modificationTime = 292867187.668104;
+		modificationTime = 292867187.6681041;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -237,7 +223,6 @@
 		activeSDKPreference = macosx10.6;
 		activeTarget = 6CAD1E9211696AEC00D938C2 /* SHDTest */;
 		addToTargets = (
-			6C2565991174B87D00CE0A79 /* EsCampur */,
 		);
 		breakpoints = (
 			6C5E4F951174A6FA00756427 /* shd_thread.cc:203 */,
@@ -247,7 +232,6 @@
 		codeSenseManager = 6C959A301169373100E33A57 /* Code sense */;
 		executables = (
 			6CAD1E9411696AEC00D938C2 /* SHDTest */,
-			6C25659B1174B87D00CE0A79 /* EsCampur */,
 		);
 		ignoreBreakpointsInProjectsDict = {
 		};
@@ -370,22 +354,22 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 292861960;
-			PBXWorkspaceStateSaveDate = 292861960;
+			PBXPerProjectTemplateStateSaveDate = 292876582;
+			PBXWorkspaceStateSaveDate = 292876582;
 		};
 		perUserProjectItems = {
-			6C2565BC1174E80300CE0A79 /* PBXTextBookmark */ = 6C2565BC1174E80300CE0A79 /* PBXTextBookmark */;
-			6C2565BD1174E80300CE0A79 /* PBXTextBookmark */ = 6C2565BD1174E80300CE0A79 /* PBXTextBookmark */;
-			6C2565BE1174E80300CE0A79 /* PBXTextBookmark */ = 6C2565BE1174E80300CE0A79 /* PBXTextBookmark */;
-			6C2565BF1174E80300CE0A79 /* PBXTextBookmark */ = 6C2565BF1174E80300CE0A79 /* PBXTextBookmark */;
-			6C2565C01174E80300CE0A79 /* PBXTextBookmark */ = 6C2565C01174E80300CE0A79 /* PBXTextBookmark */;
-			6C2565C11174E80300CE0A79 /* PBXTextBookmark */ = 6C2565C11174E80300CE0A79 /* PBXTextBookmark */;
-			6C2565C21174E80300CE0A79 /* PBXTextBookmark */ = 6C2565C21174E80300CE0A79 /* PBXTextBookmark */;
-			6C2565C31174E80300CE0A79 /* PBXTextBookmark */ = 6C2565C31174E80300CE0A79 /* PBXTextBookmark */;
-			6C2565C41174E80300CE0A79 /* PBXTextBookmark */ = 6C2565C41174E80300CE0A79 /* PBXTextBookmark */;
-			6C2565C51174E80300CE0A79 /* PBXTextBookmark */ = 6C2565C51174E80300CE0A79 /* PBXTextBookmark */;
-			6C2565C61174E80300CE0A79 /* PBXBookmark */ = 6C2565C61174E80300CE0A79 /* PBXBookmark */;
-			6C2565C71174E80300CE0A79 /* PBXTextBookmark */ = 6C2565C71174E80300CE0A79 /* PBXTextBookmark */;
+			6C2565BC1174E80300CE0A79 = 6C2565BC1174E80300CE0A79 /* PBXTextBookmark */;
+			6C2565BD1174E80300CE0A79 = 6C2565BD1174E80300CE0A79 /* PBXTextBookmark */;
+			6C2565BE1174E80300CE0A79 = 6C2565BE1174E80300CE0A79 /* PBXTextBookmark */;
+			6C2565BF1174E80300CE0A79 = 6C2565BF1174E80300CE0A79 /* PBXTextBookmark */;
+			6C2565C01174E80300CE0A79 = 6C2565C01174E80300CE0A79 /* PBXTextBookmark */;
+			6C2565C11174E80300CE0A79 = 6C2565C11174E80300CE0A79 /* PBXTextBookmark */;
+			6C2565C21174E80300CE0A79 = 6C2565C21174E80300CE0A79 /* PBXTextBookmark */;
+			6C2565C31174E80300CE0A79 = 6C2565C31174E80300CE0A79 /* PBXTextBookmark */;
+			6C2565C41174E80300CE0A79 = 6C2565C41174E80300CE0A79 /* PBXTextBookmark */;
+			6C2565C51174E80300CE0A79 = 6C2565C51174E80300CE0A79 /* PBXTextBookmark */;
+			6C2565C61174E80300CE0A79 = 6C2565C61174E80300CE0A79 /* PBXBookmark */;
+			6C2565C71174E80300CE0A79 = 6C2565C71174E80300CE0A79 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 6C959A2F1169373100E33A57 /* Source Control */;
 		userBuildSettings = {
@@ -517,7 +501,7 @@
 	};
 	6CAD1EA811696BB400D938C2 /* main_test.cc */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1011, 448}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1011, 503}}";
 			sepNavSelRange = "{303, 25}";
 			sepNavVisRange = "{0, 500}";
 			sepNavWindowFrame = "{{15, 4}, {750, 774}}";
@@ -541,14 +525,14 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1011, 611}}";
 			sepNavSelRange = "{192, 0}";
-			sepNavVisRange = "{193, 880}";
+			sepNavVisRange = "{139, 934}";
 		};
 	};
 	6CC608E2116FFD650079F526 /* SHDUrlTest.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1011, 1404}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1011, 1417}}";
 			sepNavSelRange = "{446, 0}";
-			sepNavVisRange = "{189, 797}";
+			sepNavVisRange = "{189, 795}";
 			sepNavWindowFrame = "{{15, 4}, {750, 774}}";
 		};
 	};
