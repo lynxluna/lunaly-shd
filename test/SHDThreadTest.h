@@ -63,11 +63,19 @@ TEST_F( SHDThreadTest, MultiThreadTestImmediate )
 */
 TEST_F( SHDThreadTest, MultiThreadTestQueued )
 {
+#ifndef _WIN32
 	std::ofstream outfile1("/tmp/madness_abc1.html", std::ofstream::binary );
 	std::ofstream outfile2("/tmp/madness_abc2.jpg", std::ofstream::binary );
 	std::ofstream outfile3("/tmp/madness_abc3.jpg", std::ofstream::binary );
 	std::ofstream outfile4("/tmp/madness_abc4.jpg", std::ofstream::binary );
 	std::ofstream outfile5("/tmp/madness_abc5.jpg", std::ofstream::binary );
+#else
+	std::ofstream outfile1("D:\\madness_abc1.html", std::ofstream::binary );
+	std::ofstream outfile2("D:\\madness_abc2.jpg", std::ofstream::binary );
+	std::ofstream outfile3("D:\\madness_abc3.jpg", std::ofstream::binary );
+	std::ofstream outfile4("D:\\madness_abc4.jpg", std::ofstream::binary );
+	std::ofstream outfile5("D:\\madness_abc5.jpg", std::ofstream::binary );
+#endif
 	
 	
 	SHDManager manager(2);
