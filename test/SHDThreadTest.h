@@ -24,7 +24,8 @@ protected:
 	std::vector<SHDRequest> _valid_reqs;
 	boost::asio::io_service io;
 };
-/*
+
+
 TEST_F( SHDThreadTest, RequestTest )
 {
 	std::ofstream outfile1("/tmp/madness1.jpg", std::ofstream::binary );
@@ -60,7 +61,7 @@ TEST_F( SHDThreadTest, MultiThreadTestImmediate )
 	outfile2.close();
 	outfile3.close();
 }
-*/
+
 TEST_F( SHDThreadTest, MultiThreadTestQueued )
 {
 #ifndef _WIN32

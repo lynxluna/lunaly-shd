@@ -14,6 +14,8 @@
 		6C21886811757EEC002AF586 /* shd_auth_simple_realm.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6C5BF7BA11757D070020209F /* shd_auth_simple_realm.cc */; };
 		6C218897117581EF002AF586 /* util.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C218895117581EF002AF586 /* util.h */; };
 		6C218898117581EF002AF586 /* util.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6C218896117581EF002AF586 /* util.cc */; };
+		6C2188F011758B61002AF586 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2188EF11758B61002AF586 /* libcrypto.dylib */; };
+		6C2188F211758B61002AF586 /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2188F111758B61002AF586 /* libssl.dylib */; };
 		6C5BF7BB11757D070020209F /* shd_auth_simple_realm.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C5BF7B911757D070020209F /* shd_auth_simple_realm.h */; };
 		6C65F94F1173B55500C65A18 /* libboost_signals-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C65F94E1173B55500C65A18 /* libboost_signals-mt.a */; };
 		6CAD1E301169519B00D938C2 /* shdurl.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6CAD1E2F1169519B00D938C2 /* shdurl.cc */; };
@@ -48,7 +50,8 @@
 		6C007145117437A3007F1EB7 /* shd_thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shd_thread.h; path = src/shd_thread.h; sourceTree = "<group>"; };
 		6C218895117581EF002AF586 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = util.h; path = src/util.h; sourceTree = "<group>"; };
 		6C218896117581EF002AF586 /* util.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = util.cc; path = src/util.cc; sourceTree = "<group>"; };
-		6C25659C1174B87D00CE0A79 /* EsCampur-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EsCampur-Info.plist"; sourceTree = "<group>"; };
+		6C2188EF11758B61002AF586 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = /opt/local/lib/libcrypto.dylib; sourceTree = "<absolute>"; };
+		6C2188F111758B61002AF586 /* libssl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.dylib; path = /opt/local/lib/libssl.dylib; sourceTree = "<absolute>"; };
 		6C2565AE1174E6E600CE0A79 /* SHDThreadTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHDThreadTest.h; path = test/SHDThreadTest.h; sourceTree = "<group>"; };
 		6C5BF7B911757D070020209F /* shd_auth_simple_realm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shd_auth_simple_realm.h; path = src/shd_auth_simple_realm.h; sourceTree = "<group>"; };
 		6C5BF7BA11757D070020209F /* shd_auth_simple_realm.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = shd_auth_simple_realm.cc; path = src/shd_auth_simple_realm.cc; sourceTree = "<group>"; };
@@ -93,6 +96,8 @@
 				6CAD1FC81169792A00D938C2 /* libboost_system-mt.a in Frameworks */,
 				6C65F94F1173B55500C65A18 /* libboost_signals-mt.a in Frameworks */,
 				6C006FCA1174132B007F1EB7 /* libglog.a in Frameworks */,
+				6C2188F011758B61002AF586 /* libcrypto.dylib in Frameworks */,
+				6C2188F211758B61002AF586 /* libssl.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,7 +117,8 @@
 				6C65F94E1173B55500C65A18 /* libboost_signals-mt.a */,
 				6CAD1FC0116978F100D938C2 /* libgtest.a */,
 				6C006FAC1174101D007F1EB7 /* libglog.a */,
-				6C25659C1174B87D00CE0A79 /* EsCampur-Info.plist */,
+				6C2188EF11758B61002AF586 /* libcrypto.dylib */,
+				6C2188F111758B61002AF586 /* libssl.dylib */,
 			);
 			sourceTree = "<group>";
 		};

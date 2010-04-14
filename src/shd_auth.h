@@ -9,7 +9,8 @@
 
 #ifndef ___SHD_AUTH_INTERFACE
 #define ___SHD_AUTH_INTERFACE
-
+#include "shdurl.h"
+#include "shd_request.h"
 class SHDAuthInterface
 {
 public:

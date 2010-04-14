@@ -16,6 +16,7 @@ class SHDAuthSimpleRealmPrivate;
 class SHDAuthSimpleRealm : public SHDAuthInterface
 {
 public:
+	SHDAuthSimpleRealm();
 	virtual void set_token( const std::string & );
 	virtual std::string token() const;
 	virtual void set_token_secret( const std::string & );
