@@ -20,3 +20,15 @@ BuildLog.htm
 *.embed.manifest
 *.intermediate.manifest
 *.dep
+*.sdf
+*.old
+*.orig
+*/Debug
+*/Release
+UpgradeLog.XML
+_UpgradeReport_Files
+*.vcxproj
+*.vcxproj.filters
+msvc/SHD/Release/
+msvc/SHDTest/Debug/
+msvc/SHDTest/Release/
