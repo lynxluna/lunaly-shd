@@ -239,6 +239,7 @@ void SHDThreadPrivate::handle_read_headers(const boost::system::error_code& err)
 					}
 				}
 				break;
+#if 0 // not yet supported (chunked transfer)
 			case 't':
 				if (boost::iequals(hdrpair.first, "transfer-encoding"))
 				{
@@ -247,6 +248,8 @@ void SHDThreadPrivate::handle_read_headers(const boost::system::error_code& err)
 						_chunked = false;
 					}
 				}
+				break;
+#endif
 			}
 						
 			
@@ -261,14 +264,14 @@ void SHDThreadPrivate::handle_read_headers(const boost::system::error_code& err)
 			{
 				char *buf = new char[ csize + 1 ];
 				std::istream contstream( &_resp );
-				contstream.readsome(buf, csize);
 				if ( !_chunked )
 				{
+					contstream.readsome(buf, csize);
 					output->write(buf, csize);
 				}
 				else
 				{
-					// do chunked transfer
+					// decode chunked transfer
 				}
 				_consumed = csize;
 				delete [] buf;
@@ -299,14 +302,14 @@ void SHDThreadPrivate::handle_read_content(const boost::system::error_code& err)
 			std::istream contstream( &_cont );
 			const size_t write_size = (csize >= 1024 ? 1024 : csize);
 			
-			contstream.readsome(buf, 1024);
 			if ( !_chunked )
 			{
+				contstream.readsome(buf, 1024);
 				output->write(buf, write_size);
 			}
 			else
 			{
-				// do chunked transfer
+				// decode chunked transfer
 			}
 			_consumed += write_size;
 			// DLOG(INFO) << reqsource.url() << " -- writing (" << _consumed << " of " << _fsize << " bytes) \n";
