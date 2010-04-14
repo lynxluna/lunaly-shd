@@ -7,6 +7,8 @@
  *
  */
 
+#ifndef __SHD_COMMON_H
+#define __SHD_COMMON_H
 #if defined(__OBJC__) && defined(__APPLE__)
 #import <Cocoa/Cocoa.h>
 #endif
@@ -44,5 +46,6 @@
 #include <boost/function.hpp>
 #include <boost/cstdint.hpp>
 #include <boost/signal.hpp>
+#endif
 
 

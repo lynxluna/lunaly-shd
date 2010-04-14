@@ -7,3 +7,18 @@
  *
  */
 
+#ifndef ___SHD_AUTH_INTERFACE
+#define ___SHD_AUTH_INTERFACE
+
+class SHDAuthInterface
+{
+public:
+	virtual void set_token( const std::string & ) = 0 ;
+	virtual std::string token() const = 0 ;
+	virtual void set_token_secret( const std::string & ) = 0 ;
+	virtual std::string token_secret() const = 0 ;
+	
+	virtual void sign_request( SHDRequest &req ) = 0;
+};
+
+#endif //___SHD_AUTH_INTERFACE

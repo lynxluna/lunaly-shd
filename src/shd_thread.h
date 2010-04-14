@@ -7,6 +7,9 @@
  *
  */
 
+#ifndef __SHD_THREAD_H
+#define __SHD_THREAD_H
+
 class SHDThreadPrivate;
 class SHDThread
 {
@@ -26,3 +29,5 @@ public:
 private:
 	boost::shared_ptr<SHDThreadPrivate> d_ptr;
 };
+
+#endif

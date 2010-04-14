@@ -7,6 +7,9 @@
  *
  */
 
+#ifndef __SHD_URL_H
+#define __SHD_URL_H
+
 class SHDUrl
 {
 public:
@@ -33,3 +36,5 @@ private:
 	
 	friend std::ostream &operator << ( std::ostream &s, const SHDUrl & );
 };
+
+#endif __SHD_URL_H

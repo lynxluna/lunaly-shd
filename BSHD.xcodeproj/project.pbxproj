@@ -11,6 +11,10 @@
 		6C00704F11742152007F1EB7 /* shd_manager.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6C959A3F1169385D00E33A57 /* shd_manager.cc */; };
 		6C007146117437A3007F1EB7 /* shd_thread.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6C007144117437A3007F1EB7 /* shd_thread.cc */; };
 		6C007147117437A3007F1EB7 /* shd_thread.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C007145117437A3007F1EB7 /* shd_thread.h */; };
+		6C21886811757EEC002AF586 /* shd_auth_simple_realm.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6C5BF7BA11757D070020209F /* shd_auth_simple_realm.cc */; };
+		6C218897117581EF002AF586 /* util.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C218895117581EF002AF586 /* util.h */; };
+		6C218898117581EF002AF586 /* util.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6C218896117581EF002AF586 /* util.cc */; };
+		6C5BF7BB11757D070020209F /* shd_auth_simple_realm.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C5BF7B911757D070020209F /* shd_auth_simple_realm.h */; };
 		6C65F94F1173B55500C65A18 /* libboost_signals-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C65F94E1173B55500C65A18 /* libboost_signals-mt.a */; };
 		6CAD1E301169519B00D938C2 /* shdurl.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6CAD1E2F1169519B00D938C2 /* shdurl.cc */; };
 		6CAD1E32116951AF00D938C2 /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CAD1E31116951AF00D938C2 /* common.h */; };
@@ -42,8 +46,12 @@
 		6C006FAC1174101D007F1EB7 /* libglog.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglog.a; path = /usr/local/lib/libglog.a; sourceTree = "<absolute>"; };
 		6C007144117437A3007F1EB7 /* shd_thread.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = shd_thread.cc; path = src/shd_thread.cc; sourceTree = "<group>"; };
 		6C007145117437A3007F1EB7 /* shd_thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shd_thread.h; path = src/shd_thread.h; sourceTree = "<group>"; };
+		6C218895117581EF002AF586 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = util.h; path = src/util.h; sourceTree = "<group>"; };
+		6C218896117581EF002AF586 /* util.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = util.cc; path = src/util.cc; sourceTree = "<group>"; };
 		6C25659C1174B87D00CE0A79 /* EsCampur-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EsCampur-Info.plist"; sourceTree = "<group>"; };
 		6C2565AE1174E6E600CE0A79 /* SHDThreadTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHDThreadTest.h; path = test/SHDThreadTest.h; sourceTree = "<group>"; };
+		6C5BF7B911757D070020209F /* shd_auth_simple_realm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shd_auth_simple_realm.h; path = src/shd_auth_simple_realm.h; sourceTree = "<group>"; };
+		6C5BF7BA11757D070020209F /* shd_auth_simple_realm.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = shd_auth_simple_realm.cc; path = src/shd_auth_simple_realm.cc; sourceTree = "<group>"; };
 		6C65F94E1173B55500C65A18 /* libboost_signals-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_signals-mt.a"; path = "/opt/local/lib/libboost_signals-mt.a"; sourceTree = "<absolute>"; };
 		6C959A3E1169385D00E33A57 /* shd_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shd_manager.h; path = src/shd_manager.h; sourceTree = "<group>"; };
 		6C959A3F1169385D00E33A57 /* shd_manager.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = shd_manager.cc; path = src/shd_manager.cc; sourceTree = "<group>"; };
@@ -132,6 +140,10 @@
 				6CAD1E2F1169519B00D938C2 /* shdurl.cc */,
 				6C007144117437A3007F1EB7 /* shd_thread.cc */,
 				6CC608DE116FFCA60079F526 /* shd_auth.cc */,
+				6C5BF7B911757D070020209F /* shd_auth_simple_realm.h */,
+				6C5BF7BA11757D070020209F /* shd_auth_simple_realm.cc */,
+				6C218895117581EF002AF586 /* util.h */,
+				6C218896117581EF002AF586 /* util.cc */,
 			);
 			name = SHD;
 			sourceTree = "<group>";
@@ -161,6 +173,8 @@
 				6CC608E9116FFDA60079F526 /* shd_request.cc in Headers */,
 				6CC608E8116FFD950079F526 /* shd_request.h in Headers */,
 				6C007147117437A3007F1EB7 /* shd_thread.h in Headers */,
+				6C5BF7BB11757D070020209F /* shd_auth_simple_realm.h in Headers */,
+				6C218897117581EF002AF586 /* util.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,11 +239,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C21886811757EEC002AF586 /* shd_auth_simple_realm.cc in Sources */,
 				6C00704F11742152007F1EB7 /* shd_manager.cc in Sources */,
 				6CAD1E301169519B00D938C2 /* shdurl.cc in Sources */,
 				6CC608E0116FFCA60079F526 /* shd_auth.cc in Sources */,
 				6CC608E7116FFD950079F526 /* shd_request.cc in Sources */,
 				6C007146117437A3007F1EB7 /* shd_thread.cc in Sources */,
+				6C218898117581EF002AF586 /* util.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

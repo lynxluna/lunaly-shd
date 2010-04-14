@@ -7,6 +7,8 @@
  *
  */
 
+#ifndef __SHD_HEADER_H
+#define __SHD_HEADER_H
 
 class SHDHeaderPrivate
 {
@@ -29,3 +31,5 @@ private:
 	void set_raw_header_internal( const std::string &key, const std::string &value );
 	void parse_and_set_header( const std::string &key, const std::string &value );
 };
+
+#endif //__SHD_HEADER_H
