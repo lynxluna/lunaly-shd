@@ -22,6 +22,7 @@ public:
 	SHDRequest reqsource;
 	bool in_progress;
 	void move_parent( SHDThread *parent );
+	
 private:
 	SHDThread * q_ptr;
 	
@@ -33,13 +34,18 @@ private:
 	
 	size_t _fsize;
 	size_t _consumed;
+	bool   _chunked;
+	bool   _last_chunk_finished;
+	size_t _last_chunk_size;
 	
 	void handle_resolve( const boost::system::error_code &e, boost::asio::ip::tcp::resolver::iterator endpoint_iter );
 	void handle_connect( const boost::system::error_code &e, boost::asio::ip::tcp::resolver::iterator endpoint_iter );
 	void handle_write_request( const boost::system::error_code &e );
 	void handle_read_status_line( const boost::system::error_code &e );
 	void handle_read_headers( const boost::system::error_code &e);
-	void handle_read_content(const boost::system::error_code& err);	
+	void handle_read_content(const boost::system::error_code& err);
+
+	void internal_reset();
 };
 
 SHDThread::SHDThread( boost::asio::io_service &io_service )
@@ -74,12 +80,23 @@ bool SHDThread::is_in_progress() const
 SHDRequest SHDThread::request() const
 {
 	return d_ptr->reqsource;
-}
+}		
 
 SHDThreadPrivate::SHDThreadPrivate( SHDThread *parent, boost::asio::io_service &io_service )
-:output(0),  in_progress(false), q_ptr( parent ), _resolver(io_service), _sock(io_service), _fsize(-1), _consumed(0)
+:output(0),  in_progress(false), q_ptr( parent ), _resolver(io_service), _sock(io_service), _fsize(-1), _consumed(0),
+_chunked(false), _last_chunk_finished(false), _last_chunk_size(0)
 {
 	
+}
+
+void SHDThreadPrivate::internal_reset()
+{
+	in_progress = false;
+	output = 0;
+	_fsize = -1;
+	_consumed = 0;
+	_chunked = false;
+	_sock.close();
 }
 
 void SHDThreadPrivate::move_parent( SHDThread *parent )
@@ -221,6 +238,18 @@ void SHDThreadPrivate::handle_read_headers(const boost::system::error_code& err)
 						_fsize = -1;
 					}
 				}
+				break;
+#if 0 // not yet supported (chunked transfer)
+			case 't':
+				if (boost::iequals(hdrpair.first, "transfer-encoding"))
+				{
+					if (boost::iequals(hdrpair.second,"chunked"))
+					{
+						_chunked = false;
+					}
+				}
+				break;
+#endif
 			}
 						
 			
@@ -235,8 +264,15 @@ void SHDThreadPrivate::handle_read_headers(const boost::system::error_code& err)
 			{
 				char *buf = new char[ csize + 1 ];
 				std::istream contstream( &_resp );
-				contstream.readsome(buf, csize);
-				output->write(buf, csize);
+				if ( !_chunked )
+				{
+					contstream.readsome(buf, csize);
+					output->write(buf, csize);
+				}
+				else
+				{
+					// decode chunked transfer
+				}
 				_consumed = csize;
 				delete [] buf;
 			}
@@ -266,8 +302,15 @@ void SHDThreadPrivate::handle_read_content(const boost::system::error_code& err)
 			std::istream contstream( &_cont );
 			const size_t write_size = (csize >= 1024 ? 1024 : csize);
 			
-			contstream.readsome(buf, 1024);
-			output->write(buf, write_size );
+			if ( !_chunked )
+			{
+				contstream.readsome(buf, 1024);
+				output->write(buf, write_size);
+			}
+			else
+			{
+				// decode chunked transfer
+			}
 			_consumed += write_size;
 			// DLOG(INFO) << reqsource.url() << " -- writing (" << _consumed << " of " << _fsize << " bytes) \n";
 			if (_fsize != -1)
@@ -285,11 +328,7 @@ void SHDThreadPrivate::handle_read_content(const boost::system::error_code& err)
 	{
 		DLOG(INFO) << reqsource.url() << " -- done\n";
 		q_ptr->done();
-		in_progress = false;
-		output = 0;
-		_fsize = -1;
-		_consumed = 0;
-		_sock.close();
+		internal_reset();
 	}
     else if (err != boost::asio::error::eof)
     {
