@@ -11,6 +11,7 @@
 #include "shd_request.h"
 #include "shd_thread.h"
 #include <boost/lexical_cast.hpp>
+#include <sstream>
 
 class SHDThreadPrivate
 {
@@ -239,13 +240,13 @@ void SHDThreadPrivate::handle_read_headers(const boost::system::error_code& err)
 					}
 				}
 				break;
-#if 0 // not yet supported (chunked transfer)
+#if 0// not yet supported (chunked transfer)
 			case 't':
 				if (boost::iequals(hdrpair.first, "transfer-encoding"))
 				{
 					if (boost::iequals(hdrpair.second,"chunked"))
 					{
-						_chunked = false;
+						_chunked = true;
 					}
 				}
 				break;
@@ -268,12 +269,46 @@ void SHDThreadPrivate::handle_read_headers(const boost::system::error_code& err)
 				{
 					contstream.readsome(buf, csize);
 					output->write(buf, csize);
+					_consumed = csize;
 				}
 				else
 				{
-					// decode chunked transfer
+					size_t total_chunk = 0;
+					size_t current_chunk = 0;
+					std::string sizestr;
+					while ( total_chunk < csize )
+					{
+						std::getline( contstream, sizestr);
+						boost::trim(sizestr);
+						std::istringstream iss( sizestr);
+						iss >> std::hex >> current_chunk;
+						if ( current_chunk <= 0 )
+						{
+							break;
+						}
+						
+						size_t wsize = std::min( current_chunk, csize );
+						
+						total_chunk += wsize;
+						contstream.readsome(buf, wsize);
+						output->write(buf, wsize);
+						
+						_consumed += wsize;
+					}
+					
+					if ( csize < current_chunk )
+					{
+						_last_chunk_finished = false;
+						_last_chunk_size = current_chunk - csize;
+					}
+					else 
+					{
+						_last_chunk_finished = true;
+						_last_chunk_size = -1;
+					}
+
 				}
-				_consumed = csize;
+				
 				delete [] buf;
 			}
 		
@@ -306,12 +341,60 @@ void SHDThreadPrivate::handle_read_content(const boost::system::error_code& err)
 			{
 				contstream.readsome(buf, 1024);
 				output->write(buf, write_size);
+				_consumed += write_size;
 			}
 			else
 			{
-				// decode chunked transfer
+				size_t total_chunk = 0;
+				size_t current_chunk = 0;
+				std::string sizestr;
+				
+				if ( _last_chunk_finished )
+				{
+					while ( total_chunk < write_size )
+					{
+						std::getline( contstream, sizestr);
+						boost::trim(sizestr);
+						std::istringstream iss( sizestr);
+						iss >> std::hex >> current_chunk;
+						if ( current_chunk <= 0 )
+						{
+							break;
+						}
+						
+						size_t wsize = std::min( current_chunk, csize );
+						
+						total_chunk += wsize;
+						contstream.readsome(buf, wsize);
+						output->write(buf, wsize);
+						
+						_consumed += wsize;
+					}
+
+				}
+				else 
+				{
+					current_chunk = _last_chunk_size;
+					size_t wsize = std::min( current_chunk, csize );
+					contstream.readsome(buf, wsize);
+					output->write(buf, wsize);
+					_consumed += wsize;
+				}
+
+				
+				if ( csize < current_chunk )
+				{
+					_last_chunk_finished = false;
+					_last_chunk_size = current_chunk - csize;
+				}
+				else 
+				{
+					_last_chunk_finished = true;
+					_last_chunk_size = -1;
+				}
+
 			}
-			_consumed += write_size;
+			
 			// DLOG(INFO) << reqsource.url() << " -- writing (" << _consumed << " of " << _fsize << " bytes) \n";
 			if (_fsize != -1)
 			{
