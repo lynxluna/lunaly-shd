@@ -22,6 +22,7 @@
 #include "util.h"
 #include <sstream>
 
+
 TEST(UtilTest, Base64EncodeTest)
 {
 	const std::string t("Aladdin:open sesame");

@@ -25,7 +25,7 @@ protected:
 	boost::asio::io_service io;
 };
 
-/*
+
 TEST_F( SHDThreadTest, RequestTest )
 {
 	std::ofstream outfile1("/tmp/madness1.jpg", std::ofstream::binary );
@@ -94,11 +94,11 @@ TEST_F( SHDThreadTest, MultiThreadTestQueued )
 	outfile4.close();
 	outfile5.close();
 }
-*/
+
 
 TEST_F( SHDThreadTest, ChunkedTransfer )
 {
 	SHDManager manager;
-	manager.call( _valid_reqs[0], &std::cout, false );
+	manager.call( SHDRequest(SHDUrl("http://localhost:8888/")), &std::cout, false );
 	manager.start();
 }

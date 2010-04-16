@@ -113,7 +113,11 @@ void SHDThreadPrivate::call( const SHDRequest &req )
 	
 	reqsource = req;
 	
-	boost::asio::ip::tcp::resolver::query query(reqsource.url().host(), reqsource.url().protocol());
+	const boost::int32_t prt = reqsource.url().port();
+	const std::string host_str = reqsource.url().host();
+	const std::string query_host = ( prt == -1 ?
+	    reqsource.url().protocol() : boost::lexical_cast<std::string>(prt));
+	boost::asio::ip::tcp::resolver::query query(host_str,query_host);
     _resolver.async_resolve(query,
 							boost::bind(&SHDThreadPrivate::handle_resolve, this,
 										boost::asio::placeholders::error,

@@ -10,8 +10,9 @@
 #include "common.h"
 #include "shdurl.h"
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 
-static const std::string _urlRe = "(https|http|ftp)\\:\\/\\/(([\\w|\\-]+\\.)*([\\w|\\-]*))((\\/[\\w|\\-]+)*)(\\/.*|\\?.*)";
+static const std::string _urlRe = "(https|http|ftp)\\:\\/\\/(([\\w|\\-|\\:]+\\.)*([\\w|\\-|\\:]*))((\\/[\\w|\\-]+)*)(\\/.*|\\?.*)";
 
 static inline bool _check_url_validity( const std::string &strUrl )
 {
@@ -27,7 +28,7 @@ std::ostream &operator<<( std::ostream &outp, const SHDUrl &url )
 	return outp;
 }
 
-SHDUrl::SHDUrl( const std::string &strUrl )
+SHDUrl::SHDUrl( const std::string &strUrl ) : _port (-1)
 {
 	if (!_check_url_validity(strUrl))
 	{
@@ -82,6 +83,32 @@ SHDUrl::SHDUrl( const std::string &strUrl )
 			{
 				_qs   = path_and_qs[1];
 			}
+			
+			const size_t hostlen = _host.length();
+			
+			if ( hostlen > 0 )
+			{
+				if (_host[hostlen - 1] == '/')
+				{
+					_host = _host.substr(0, _host.length() - 1);
+				}
+				std::vector<std::string> hostpart;
+				boost::split( hostpart, _host, boost::is_any_of(":"));
+				
+				if (hostpart.size() ==2  )
+				{
+					try 
+					{
+						_port = boost::lexical_cast<boost::int32_t>(hostpart[1]);
+						_host = hostpart[0];
+						boost::trim(_host);
+					}
+					catch ( boost::bad_lexical_cast & )
+					{
+						_port = -1;
+					}
+				}
+			}
 		}
 	}
 
@@ -92,6 +119,7 @@ SHDUrl::SHDUrl(void)
 , _host(std::string())
 , _path(std::string())
 , _qs(std::string())
+, _port(-1)
 {
 	
 }
@@ -101,7 +129,8 @@ bool SHDUrl::operator==( const SHDUrl &other ) const
 	return (_protocol == other._protocol) &&
 	       (_host == other._host) &&
 		   (_path == other._path) &&
-	       (_qs   == other._qs);
+	       (_qs   == other._qs) &&
+	       (_port == other._port);
 }
 
 SHDUrl::SHDUrl( const SHDUrl &other )
@@ -110,6 +139,7 @@ SHDUrl::SHDUrl( const SHDUrl &other )
 	_host     = other._host;
 	_path     = other._path;
 	_qs		  = other._qs;
+	_port     = other._port;
 }
 
 SHDUrl &SHDUrl::operator=( const SHDUrl &other )
@@ -118,6 +148,7 @@ SHDUrl &SHDUrl::operator=( const SHDUrl &other )
 	_host     = other._host;
 	_path     = other._path;
 	_qs       = other._qs;
+	_port     = other._port;
 	
 	return *this;
 }
