@@ -13,7 +13,7 @@
 #include <openssl/evp.h>
 #include <openssl/bio.h>
 #include <openssl/buffer.h>
-
+#include <sstream>
 std::string base64encode( const unsigned char *data, const size_t length )
 {
 	BIO *bmem, *b64;
@@ -30,5 +30,13 @@ std::string base64encode( const unsigned char *data, const size_t length )
 	
 	BIO_free_all(b64);
 	
+	return ret;
+}
+
+size_t hexstring_to_size( const std::string &hexstr )
+{
+	std::istringstream iss( hexstr );
+	size_t ret;
+	iss >> std::hex >> ret;
 	return ret;
 }

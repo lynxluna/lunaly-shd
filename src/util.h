@@ -11,5 +11,6 @@
 #define __SHD_UTIL_H
 
 std::string base64encode( const unsigned char *data, const size_t length );
+size_t hexstring_to_size( const std::string &hexstr );
 
 #endif //__SHD_UTIL_H

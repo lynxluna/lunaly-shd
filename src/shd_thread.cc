@@ -10,6 +10,7 @@
 #include "shdurl.h"
 #include "shd_request.h"
 #include "shd_thread.h"
+#include "util.h"
 #include <boost/lexical_cast.hpp>
 #include <sstream>
 
@@ -31,7 +32,6 @@ private:
 	boost::asio::ip::tcp::socket   _sock;
 	boost::asio::streambuf _req;
 	boost::asio::streambuf _resp;
-	boost::asio::streambuf _cont;
 	
 	size_t _fsize;
 	size_t _consumed;
@@ -47,6 +47,8 @@ private:
 	void handle_read_content(const boost::system::error_code& err);
 
 	void internal_reset();
+	void internal_read_all_chunked_data( char *buf /* current buffer */);
+	void internal_read_remaining_chunk_data(char *buf );
 };
 
 SHDThread::SHDThread( boost::asio::io_service &io_service )
@@ -244,7 +246,7 @@ void SHDThreadPrivate::handle_read_headers(const boost::system::error_code& err)
 					}
 				}
 				break;
-#if 0// not yet supported (chunked transfer)
+
 			case 't':
 				if (boost::iequals(hdrpair.first, "transfer-encoding"))
 				{
@@ -254,7 +256,6 @@ void SHDThreadPrivate::handle_read_headers(const boost::system::error_code& err)
 					}
 				}
 				break;
-#endif
 			}
 						
 			
@@ -277,46 +278,13 @@ void SHDThreadPrivate::handle_read_headers(const boost::system::error_code& err)
 				}
 				else
 				{
-					size_t total_chunk = 0;
-					size_t current_chunk = 0;
-					std::string sizestr;
-					while ( total_chunk < csize )
-					{
-						std::getline( contstream, sizestr);
-						boost::trim(sizestr);
-						std::istringstream iss( sizestr);
-						iss >> std::hex >> current_chunk;
-						if ( current_chunk <= 0 )
-						{
-							break;
-						}
-						
-						size_t wsize = std::min( current_chunk, csize );
-						
-						total_chunk += wsize;
-						contstream.readsome(buf, wsize);
-						output->write(buf, wsize);
-						
-						_consumed += wsize;
-					}
-					
-					if ( csize < current_chunk )
-					{
-						_last_chunk_finished = false;
-						_last_chunk_size = current_chunk - csize;
-					}
-					else 
-					{
-						_last_chunk_finished = true;
-						_last_chunk_size = -1;
-					}
-
+					internal_read_all_chunked_data(buf);					
 				}
 				
 				delete [] buf;
 			}
 		
-			boost::asio::async_read(_sock, _cont,
+			boost::asio::async_read(_sock, _resp,
 								boost::asio::transfer_at_least(1),
 								boost::bind(&SHDThreadPrivate::handle_read_content, this,
 								boost::asio::placeholders::error));
@@ -330,15 +298,83 @@ void SHDThreadPrivate::handle_read_headers(const boost::system::error_code& err)
 	}
 }
 
+
+// executed when find new chunk
+void SHDThreadPrivate::internal_read_all_chunked_data( char *buf /* current buffer */)
+{
+	size_t current_chunk_size;
+	size_t total_chunk_read = 0;
+	
+	size_t total_stream_size = _resp.size();
+	std::istream rstream(&_resp);
+	
+	while ( total_chunk_read < total_stream_size && _resp.size() > 0 )
+	{
+		std::string strhexsize;
+		std::getline( rstream, strhexsize );
+		
+		current_chunk_size = hexstring_to_size(strhexsize);
+		const size_t remaining_stream_size = _resp.size();
+		// wsize is the size of the current chunk OR the size of stream left
+		const size_t wsize = std::min( current_chunk_size, remaining_stream_size );
+		
+		rstream.readsome( buf, wsize );
+		output->write(buf, wsize);
+		
+		if ( wsize == current_chunk_size )
+		{
+			_last_chunk_finished = true;
+			_last_chunk_size = -1;
+			std::string dummy;
+			std::getline( rstream, dummy );
+		}
+		else if ( wsize == remaining_stream_size )
+		{
+			_last_chunk_finished = false;
+			_last_chunk_size = current_chunk_size - remaining_stream_size;
+		}
+	}
+}
+
+void SHDThreadPrivate::internal_read_remaining_chunk_data( char *buf /* current buffer */)
+{
+	if (_last_chunk_finished)
+	{
+		return;
+	}
+	
+	const size_t current_stream_size = _resp.size();
+	const size_t wsize = std::min( current_stream_size, _last_chunk_size );
+	
+	std::istream rstream(&_resp);
+	rstream.readsome( buf, wsize );
+	output->write(buf, wsize);
+	
+	if ( wsize == current_stream_size )
+	{
+		_last_chunk_finished = false;
+		_last_chunk_size -= current_stream_size;
+	}
+	else if ( wsize == _last_chunk_size )
+	{
+		_last_chunk_finished = true;
+		_last_chunk_size = -1;
+		std::string dummy;
+		std::getline( rstream, dummy );
+	}
+	
+	
+}
+
 void SHDThreadPrivate::handle_read_content(const boost::system::error_code& err)
 {
 	static char buf[ 1024 ];
     if (!err)
     {
-		const size_t csize = _cont.size();
+		const size_t csize = _resp.size();
 		if ( csize > 0 )
 		{
-			std::istream contstream( &_cont );
+			std::istream contstream( &_resp );
 			const size_t write_size = (csize >= 1024 ? 1024 : csize);
 			
 			if ( !_chunked )
@@ -355,48 +391,18 @@ void SHDThreadPrivate::handle_read_content(const boost::system::error_code& err)
 				
 				if ( _last_chunk_finished )
 				{
-					while ( total_chunk < write_size )
+					internal_read_all_chunked_data(buf);
+
+				}
+				else 
+				{
+					internal_read_remaining_chunk_data(buf);
+					
+					if ( _last_chunk_finished )
 					{
-						std::getline( contstream, sizestr);
-						boost::trim(sizestr);
-						std::istringstream iss( sizestr);
-						iss >> std::hex >> current_chunk;
-						if ( current_chunk <= 0 )
-						{
-							break;
-						}
-						
-						size_t wsize = std::min( current_chunk, csize );
-						
-						total_chunk += wsize;
-						contstream.readsome(buf, wsize);
-						output->write(buf, wsize);
-						
-						_consumed += wsize;
+						internal_read_all_chunked_data(buf);
 					}
-
 				}
-				else 
-				{
-					current_chunk = _last_chunk_size;
-					size_t wsize = std::min( current_chunk, csize );
-					contstream.readsome(buf, wsize);
-					output->write(buf, wsize);
-					_consumed += wsize;
-				}
-
-				
-				if ( csize < current_chunk )
-				{
-					_last_chunk_finished = false;
-					_last_chunk_size = current_chunk - csize;
-				}
-				else 
-				{
-					_last_chunk_finished = true;
-					_last_chunk_size = -1;
-				}
-
 			}
 			
 			// DLOG(INFO) << reqsource.url() << " -- writing (" << _consumed << " of " << _fsize << " bytes) \n";
@@ -406,7 +412,7 @@ void SHDThreadPrivate::handle_read_content(const boost::system::error_code& err)
 			}
 		}
 		// Continue reading remaining data until EOF.
-		boost::asio::async_read(_sock, _cont,
+		boost::asio::async_read(_sock, _resp,
 								boost::asio::transfer_at_least(1),
 								boost::bind(&SHDThreadPrivate::handle_read_content, this,
 											boost::asio::placeholders::error));

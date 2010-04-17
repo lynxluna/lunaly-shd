@@ -95,10 +95,9 @@ TEST_F( SHDThreadTest, MultiThreadTestQueued )
 	outfile5.close();
 }
 
-
 TEST_F( SHDThreadTest, ChunkedTransfer )
 {
 	SHDManager manager;
-	manager.call( SHDRequest(SHDUrl("http://localhost:8888/")), &std::cout, false );
+	manager.call( SHDRequest(SHDUrl("http://www.ansav.com/")), &std::cout, false );
 	manager.start();
 }

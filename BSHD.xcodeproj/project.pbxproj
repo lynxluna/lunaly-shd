@@ -16,6 +16,7 @@
 		6C218898117581EF002AF586 /* util.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6C218896117581EF002AF586 /* util.cc */; };
 		6C2188F011758B61002AF586 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2188EF11758B61002AF586 /* libcrypto.dylib */; };
 		6C2188F211758B61002AF586 /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2188F111758B61002AF586 /* libssl.dylib */; };
+		6C30F41911793F8500D5BC51 /* GlobalSHDTest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C30F41811793F8500D5BC51 /* GlobalSHDTest.h */; };
 		6C5BF7BB11757D070020209F /* shd_auth_simple_realm.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C5BF7B911757D070020209F /* shd_auth_simple_realm.h */; };
 		6C65F94F1173B55500C65A18 /* libboost_signals-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C65F94E1173B55500C65A18 /* libboost_signals-mt.a */; };
 		6CAD1E301169519B00D938C2 /* shdurl.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6CAD1E2F1169519B00D938C2 /* shdurl.cc */; };
@@ -53,6 +54,7 @@
 		6C2188EF11758B61002AF586 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = /opt/local/lib/libcrypto.dylib; sourceTree = "<absolute>"; };
 		6C2188F111758B61002AF586 /* libssl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.dylib; path = /opt/local/lib/libssl.dylib; sourceTree = "<absolute>"; };
 		6C2565AE1174E6E600CE0A79 /* SHDThreadTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHDThreadTest.h; path = test/SHDThreadTest.h; sourceTree = "<group>"; };
+		6C30F41811793F8500D5BC51 /* GlobalSHDTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GlobalSHDTest.h; path = test/GlobalSHDTest.h; sourceTree = "<group>"; };
 		6C5BF7B911757D070020209F /* shd_auth_simple_realm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shd_auth_simple_realm.h; path = src/shd_auth_simple_realm.h; sourceTree = "<group>"; };
 		6C5BF7BA11757D070020209F /* shd_auth_simple_realm.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = shd_auth_simple_realm.cc; path = src/shd_auth_simple_realm.cc; sourceTree = "<group>"; };
 		6C65F94E1173B55500C65A18 /* libboost_signals-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_signals-mt.a"; path = "/opt/local/lib/libboost_signals-mt.a"; sourceTree = "<absolute>"; };
@@ -161,6 +163,7 @@
 				6CC608E1116FFD650079F526 /* SHDRequestTest.h */,
 				6CC608E2116FFD650079F526 /* SHDUrlTest.h */,
 				6CAD1EA811696BB400D938C2 /* main_test.cc */,
+				6C30F41811793F8500D5BC51 /* GlobalSHDTest.h */,
 			);
 			name = SHDTest;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 				6C007147117437A3007F1EB7 /* shd_thread.h in Headers */,
 				6C5BF7BB11757D070020209F /* shd_auth_simple_realm.h in Headers */,
 				6C218897117581EF002AF586 /* util.h in Headers */,
+				6C30F41911793F8500D5BC51 /* GlobalSHDTest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
