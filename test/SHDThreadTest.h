@@ -28,9 +28,16 @@ protected:
 
 TEST_F( SHDThreadTest, RequestTest )
 {
+#if !defined(_WIN32) && !defined(_WIN64)
 	std::ofstream outfile1("/tmp/madness1.jpg", std::ofstream::binary );
 	std::ofstream outfile2("/tmp/madness2.jpg", std::ofstream::binary );
 	std::ofstream outfile3("/tmp/madness3.jpg", std::ofstream::binary );
+#else
+	std::ofstream outfile1("D:\\madness1.jpg", std::ofstream::binary );
+	std::ofstream outfile2("D:\\madness2.jpg", std::ofstream::binary );
+	std::ofstream outfile3("D:\\madness3.jpg", std::ofstream::binary );
+#endif
+
 	SHDThread t1( io ), t2( io ), t3( io ), t4(io);
 	t1.call(_valid_reqs[1], &outfile1);
 	t2.call(_valid_reqs[2], &outfile2);
@@ -45,10 +52,15 @@ TEST_F( SHDThreadTest, RequestTest )
 
 TEST_F( SHDThreadTest, MultiThreadTestImmediate )
 {
-
+#if !defined(_WIN32) && !defined(_WIN64)
 	std::ofstream outfile1("/tmp/madness_alto1.jpg", std::ofstream::binary );
 	std::ofstream outfile2("/tmp/madness_alto2.jpg", std::ofstream::binary );
 	std::ofstream outfile3("/tmp/madness_alto3.jpg", std::ofstream::binary );
+#else
+	std::ofstream outfile1("D:\\madness_alto1.jpg", std::ofstream::binary );
+	std::ofstream outfile2("D:\\madness_alto2.jpg", std::ofstream::binary );
+	std::ofstream outfile3("D:\\madness_alto3.jpg", std::ofstream::binary );
+#endif
 	
 	SHDManager manager;
 	manager.call( _valid_reqs[0], &std::cout, false );
@@ -64,7 +76,7 @@ TEST_F( SHDThreadTest, MultiThreadTestImmediate )
 
 TEST_F( SHDThreadTest, MultiThreadTestQueued )
 {
-#ifndef _WIN32
+#if !defined(_WIN32) && !defined(_WIN64)
 	std::ofstream outfile1("/tmp/madness_abc1.html", std::ofstream::binary );
 	std::ofstream outfile2("/tmp/madness_abc2.jpg", std::ofstream::binary );
 	std::ofstream outfile3("/tmp/madness_abc3.jpg", std::ofstream::binary );
