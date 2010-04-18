@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(BOOST_ROOT)\include\boost-1_42&quot;;&quot;$(GTEST_ROOT)\include&quot;;&quot;$(GLOG_ROOT)\src\windows&quot;"
+				AdditionalIncludeDirectories="&quot;$(BOOST_ROOT)\include\boost-1_42&quot;;&quot;$(GTEST_ROOT)\include&quot;;&quot;$(GLOG_ROOT)\src\windows&quot;;&quot;$(OPENSSL_ROOT)\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -106,7 +106,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(BOOST_ROOT)\include\boost-1_42&quot;;&quot;$(GTEST_ROOT)\include&quot;;&quot;$(GLOG_ROOT)\src\windows&quot;"
+				AdditionalIncludeDirectories="&quot;$(BOOST_ROOT)\include\boost-1_42&quot;;&quot;$(GTEST_ROOT)\include&quot;;&quot;$(GLOG_ROOT)\src\windows&quot;;&quot;$(OPENSSL_ROOT)\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -157,6 +157,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\shd_auth_simple_realm.cc"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\shd_manager.cc"
 				>
 			</File>
@@ -172,6 +176,10 @@
 				RelativePath="..\..\src\shdurl.cc"
 				>
 			</File>
+			<File
+				RelativePath="..\..\src\util.cc"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -184,6 +192,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\shd_auth.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\shd_auth_simple_realm.h"
 				>
 			</File>
 			<File
@@ -204,6 +216,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\shdurl.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\util.h"
 				>
 			</File>
 		</Filter>

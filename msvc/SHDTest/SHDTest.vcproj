@@ -61,9 +61,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="gtest.lib libglog_static.lib"
+				AdditionalDependencies="gtest.lib libglog_static.lib libeay32.lib ssleay32.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(BOOST_ROOT)\lib&quot;;&quot;$(GLOG_ROOT)\Release&quot;;&quot;$(GTEST_ROOT)\msvc\gtest\Release&quot;"
+				AdditionalLibraryDirectories="&quot;$(BOOST_ROOT)\lib&quot;;&quot;$(GLOG_ROOT)\Release&quot;;&quot;$(GTEST_ROOT)\msvc\gtest\Release&quot;;&quot;$(OPENSSL_ROOT)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -136,9 +136,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="gtest.lib libglog_static.lib"
+				AdditionalDependencies="gtest.lib libglog_static.lib libeay32.lib ssleay32.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(BOOST_ROOT)\lib&quot;;&quot;$(GLOG_ROOT)\Release&quot;;&quot;$(GTEST_ROOT)\msvc\gtest\Release&quot;"
+				AdditionalLibraryDirectories="&quot;$(BOOST_ROOT)\lib&quot;;&quot;$(GLOG_ROOT)\Release&quot;;&quot;$(GTEST_ROOT)\msvc\gtest\Release&quot;;&quot;$(OPENSSL_ROOT)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -186,6 +186,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\..\test\GlobalSHDTest.h"
+				>
+			</File>
 			<File
 				RelativePath="..\..\test\SHDRequestTest.h"
 				>

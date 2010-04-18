@@ -16,6 +16,7 @@
 
 #ifdef _MSC_VER
 #define _WIN32_WINNT 0x500
+#define NOMINMAX // prevent clash with std::min and std::max
 #endif
 
 #include <iostream>
