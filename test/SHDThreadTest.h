@@ -28,7 +28,7 @@ protected:
 	boost::asio::io_service io;
 };
 
-/*
+
 TEST_F( SHDThreadTest, RequestTest )
 {
 #if !defined(_WIN32) && !defined(_WIN64)
@@ -116,7 +116,7 @@ TEST_F( SHDThreadTest, ChunkedTransfer )
 	manager.call( SHDRequest(SHDUrl("http://www.ansav.com/")), &std::cout, false );
 	manager.start();
 }
-*/
+ 
 TEST_F( SHDThreadTest, EncryptedTransfer )
 {
 	SHDManager manager;
