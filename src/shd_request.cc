@@ -70,7 +70,7 @@ SHDRequest &SHDRequest::operator=( const SHDRequest &other )
 	return *this;
 }
 
-SHDUrl SHDRequest::url() const
+SHDUrl &SHDRequest::url() const
 {
 	return d_ptr->url;
 }

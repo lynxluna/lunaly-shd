@@ -19,13 +19,16 @@ protected:
 							   "emily_scott_photoshoot_uhq_nude_ultra_sexy_04.jpg?auth=true")));
 		_valid_reqs.push_back(SHDRequest(SHDUrl("http://blogfile.paran.com/BLOG_463639/200704/1176594807_sp_tokumoto05_006.jpg")));
 		_valid_reqs.push_back(SHDRequest(SHDUrl("http://blog.joins.com/usr/1/1/115moon/1/3%28329%29.jpg")));
+		
+		_valid_https_reqs.push_back(SHDRequest(SHDUrl("https://ajax.dev.java.net/files/documents/3115/116135/jmaki-java-1.8.1.zip")));
 	}
 	
 	std::vector<SHDRequest> _valid_reqs;
+	std::vector<SHDRequest> _valid_https_reqs;
 	boost::asio::io_service io;
 };
 
-
+/*
 TEST_F( SHDThreadTest, RequestTest )
 {
 #if !defined(_WIN32) && !defined(_WIN64)
@@ -111,5 +114,13 @@ TEST_F( SHDThreadTest, ChunkedTransfer )
 {
 	SHDManager manager;
 	manager.call( SHDRequest(SHDUrl("http://www.ansav.com/")), &std::cout, false );
+	manager.start();
+}
+*/
+TEST_F( SHDThreadTest, EncryptedTransfer )
+{
+	SHDManager manager;
+	std::ofstream outfile2("/tmp/jmaki-java.zip", std::ofstream::binary );
+	manager.call( SHDRequest(SHDUrl("https://ajax.dev.java.net/files/documents/3115/116135/jmaki-java-1.8.1.zip")), &outfile2, false);
 	manager.start();
 }

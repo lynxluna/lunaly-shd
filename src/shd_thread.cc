@@ -14,11 +14,12 @@
 #include <boost/lexical_cast.hpp>
 #include <sstream>
 #include <algorithm>
+#include <boost/asio/ssl.hpp>
 
 class SHDThreadPrivate
 {
 public:
-	SHDThreadPrivate( SHDThread *parent, boost::asio::io_service &io_service );
+	SHDThreadPrivate( SHDThread *parent, boost::asio::io_service &io_service, bool encrypted = false );
 	void call( const SHDRequest &req );
 	
 	std::ostream *output;
@@ -31,6 +32,8 @@ private:
 	
 	boost::asio::ip::tcp::resolver _resolver;
 	boost::asio::ip::tcp::socket   _sock;
+	boost::asio::ssl::context      _ssl_ctx;
+	boost::asio::ssl::stream<boost::asio::ip::tcp::socket> _ssl_sock;
 	boost::asio::streambuf _req;
 	boost::asio::streambuf _resp;
 	
@@ -39,13 +42,16 @@ private:
 	bool   _chunked;
 	bool   _last_chunk_finished;
 	size_t _last_chunk_size;
+	bool   _encrypted;
 	
 	void handle_resolve( const boost::system::error_code &e, boost::asio::ip::tcp::resolver::iterator endpoint_iter );
 	void handle_connect( const boost::system::error_code &e, boost::asio::ip::tcp::resolver::iterator endpoint_iter );
 	void handle_write_request( const boost::system::error_code &e );
 	void handle_read_status_line( const boost::system::error_code &e );
 	void handle_read_headers( const boost::system::error_code &e);
-	void handle_read_content(const boost::system::error_code& err);
+	void handle_read_content( const boost::system::error_code& err);
+	
+	void handle_ssl_handshake( const boost::system::error_code& e);
 
 	void internal_reset();
 	void internal_read_all_chunked_data( char *buf /* current buffer */);
@@ -86,11 +92,20 @@ SHDRequest SHDThread::request() const
 	return d_ptr->reqsource;
 }		
 
-SHDThreadPrivate::SHDThreadPrivate( SHDThread *parent, boost::asio::io_service &io_service )
-:output(0),  in_progress(false), q_ptr( parent ), _resolver(io_service), _sock(io_service), _fsize(-1), _consumed(0),
-_chunked(false), _last_chunk_finished(false), _last_chunk_size(0)
+SHDThreadPrivate::SHDThreadPrivate( SHDThread *parent, boost::asio::io_service &io_service, bool encrypted )
+:output(0),  in_progress(false), q_ptr( parent )
+, _resolver(io_service)
+, _sock(io_service)
+, _ssl_ctx(io_service, boost::asio::ssl::context::sslv23_client)
+, _ssl_sock(io_service, _ssl_ctx)
+, _fsize(-1)
+, _consumed(0)
+, _chunked(false)
+, _last_chunk_finished(false)
+, _last_chunk_size(0)
+, _encrypted(encrypted)
 {
-	
+	_ssl_ctx.set_verify_mode(boost::asio::ssl::context::verify_none);
 }
 
 void SHDThreadPrivate::internal_reset()
@@ -106,6 +121,7 @@ void SHDThreadPrivate::internal_reset()
 void SHDThreadPrivate::move_parent( SHDThread *parent )
 {
 	q_ptr = parent;
+
 }
 void SHDThreadPrivate::call( const SHDRequest &req )
 {
@@ -121,6 +137,9 @@ void SHDThreadPrivate::call( const SHDRequest &req )
 	const std::string query_host = ( prt == -1 ?
 	    reqsource.url().protocol() : boost::lexical_cast<std::string>(prt));
 	boost::asio::ip::tcp::resolver::query query(host_str,query_host);
+	
+	_encrypted = boost::iequals(reqsource.url().protocol(), "https");
+	
     _resolver.async_resolve(query,
 							boost::bind(&SHDThreadPrivate::handle_resolve, this,
 										boost::asio::placeholders::error,
@@ -132,8 +151,30 @@ void SHDThreadPrivate::handle_resolve( const boost::system::error_code &e, boost
 	if ( !e )
 	{
 		boost::asio::ip::tcp::endpoint endp = *endpoint_iter;
-		_sock.async_connect(endp, boost::bind(&SHDThreadPrivate::handle_connect, this,
+		if (!_encrypted)
+		{
+			_sock.async_connect(endp, boost::bind(&SHDThreadPrivate::handle_connect, this,
 											  boost::asio::placeholders::error, ++endpoint_iter));
+		}
+		else 
+		{
+			_ssl_sock.lowest_layer().async_connect(endp, boost::bind(&SHDThreadPrivate::handle_connect, this,
+																	 boost::asio::placeholders::error, ++endpoint_iter));
+		}
+
+	}
+}
+
+void SHDThreadPrivate::handle_ssl_handshake( const boost::system::error_code &e )
+{
+	if ( !e )
+	{
+		boost::asio::async_write( _ssl_sock, _req, boost::bind( &SHDThreadPrivate::handle_write_request, 
+															   this, boost::asio::placeholders::error ));
+	}
+	else
+	{
+		LOG(ERROR) << "Error [" << __PRETTY_FUNCTION__ << "]: " << e.message() << '\n';
 	}
 }
 
@@ -141,19 +182,37 @@ void SHDThreadPrivate::handle_connect( const boost::system::error_code &e, boost
 {
 	if ( !e )
 	{
-		boost::asio::async_write( _sock, _req, boost::bind( &SHDThreadPrivate::handle_write_request, 
+		if (!_encrypted)
+		{
+			boost::asio::async_write( _sock, _req, boost::bind( &SHDThreadPrivate::handle_write_request, 
 														   this, boost::asio::placeholders::error ));
+		}
+		else
+		{
+			_ssl_sock.async_handshake(boost::asio::ssl::stream_base::client, boost::bind( &SHDThreadPrivate::handle_ssl_handshake, 
+																						 this, boost::asio::placeholders::error ));
+		}
 	}
 	else if ( endpoint_iter != boost::asio::ip::tcp::resolver::iterator())
 	{
-		_sock.close();
-		boost::asio::ip::tcp::endpoint endp = *endpoint_iter;
-		_sock.async_connect(endp, boost::bind(&SHDThreadPrivate::handle_connect, this,
+		if ( !_encrypted )
+		{
+			_sock.close();
+			boost::asio::ip::tcp::endpoint endp = *endpoint_iter;
+			_sock.async_connect(endp, boost::bind(&SHDThreadPrivate::handle_connect, this,
 											  boost::asio::placeholders::error, ++endpoint_iter));
+		}
+		else
+		{
+			_ssl_sock.lowest_layer().close();
+			boost::asio::ip::tcp::endpoint endp = *endpoint_iter;
+			_ssl_sock.lowest_layer().async_connect(endp, boost::bind(&SHDThreadPrivate::handle_connect, this,
+																	 boost::asio::placeholders::error, ++endpoint_iter));
+		}
 	}
 	else
 	{
-		std::cerr << "Error: " << e.message() << "\n";
+		LOG(ERROR) << "Error [" << __PRETTY_FUNCTION__ << "]: " << e.message() << '\n';
 	}
 }
 
@@ -161,13 +220,20 @@ void SHDThreadPrivate::handle_write_request( const boost::system::error_code &e 
 {
 	if ( !e )
 	{
-		boost::asio::async_read_until(_sock, _resp, "\r\n",
+		if (!_encrypted)
+		{
+			boost::asio::async_read_until(_sock, _resp, "\r\n",
 									  boost::bind( &SHDThreadPrivate::handle_read_status_line, this, boost::asio::placeholders::error ));
+		}
+		else
+		{
+			boost::asio::async_read_until(_ssl_sock, _resp, "\r\n",
+										  boost::bind( &SHDThreadPrivate::handle_read_status_line, this, boost::asio::placeholders::error ));
+		}
 	}
 	else
 	{
-		std::cerr << "Error: " << e.message() << "\n";
-		
+		LOG(ERROR) << "Error [" << __PRETTY_FUNCTION__ << "]: " << e.message() << '\n';
 	}
 }
 
@@ -199,9 +265,18 @@ void SHDThreadPrivate::handle_read_status_line( const boost::system::error_code 
 			return;
 		}
 		
-		boost::asio::async_read_until(_sock, _resp, "\r\n\r\n",
+		if (!_encrypted)
+		{
+			boost::asio::async_read_until(_sock, _resp, "\r\n\r\n",
 									  boost::bind(&SHDThreadPrivate::handle_read_headers, this,
 												  boost::asio::placeholders::error));
+		}
+		else
+		{
+			boost::asio::async_read_until(_ssl_sock, _resp, "\r\n\r\n",
+										  boost::bind(&SHDThreadPrivate::handle_read_headers, this,
+													  boost::asio::placeholders::error));
+		}
 		
     }
     else
@@ -284,11 +359,20 @@ void SHDThreadPrivate::handle_read_headers(const boost::system::error_code& err)
 				
 				delete [] buf;
 			}
-		
-			boost::asio::async_read(_sock, _resp,
+			if (!_encrypted)
+			{
+				boost::asio::async_read(_sock, _resp,
 								boost::asio::transfer_at_least(1),
 								boost::bind(&SHDThreadPrivate::handle_read_content, this,
 								boost::asio::placeholders::error));
+			}
+			else
+			{
+				boost::asio::async_read(_ssl_sock, _resp,
+										boost::asio::transfer_at_least(1),
+										boost::bind(&SHDThreadPrivate::handle_read_content, this,
+										boost::asio::placeholders::error));
+			}
 		}
 		
 			
@@ -413,10 +497,21 @@ void SHDThreadPrivate::handle_read_content(const boost::system::error_code& err)
 			}
 		}
 		// Continue reading remaining data until EOF.
-		boost::asio::async_read(_sock, _resp,
+		if (!_encrypted)
+		{
+			boost::asio::async_read(_sock, _resp,
 								boost::asio::transfer_at_least(1),
 								boost::bind(&SHDThreadPrivate::handle_read_content, this,
-											boost::asio::placeholders::error));
+								boost::asio::placeholders::error));
+		}
+		else 
+		{
+			boost::asio::async_read(_ssl_sock, _resp,
+									boost::asio::transfer_at_least(1),
+									boost::bind(&SHDThreadPrivate::handle_read_content, this,
+									boost::asio::placeholders::error));
+		}
+
     }
 	else if( err == boost::asio::error::eof )
 	{

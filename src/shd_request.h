@@ -39,7 +39,7 @@ public:
 	bool operator ==( const SHDRequest &other ) const;
 	SHDRequest &operator=( const SHDRequest &other );
 	
-	SHDUrl url() const;
+	SHDUrl &url() const;
 	void set_url( const SHDUrl &url );
 	
 	

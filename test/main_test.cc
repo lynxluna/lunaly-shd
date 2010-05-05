@@ -15,12 +15,13 @@
 #include "shd_auth_simple_realm.h"
 #include <gtest/gtest.h>
 
-
+/*
 #include "SHDUrlTest.h"
 #include "SHDRequestTest.h"
+*/
 #include "SHDThreadTest.h"
 #include "util.h"
-#include "GlobalSHDTest.h"
+// #include "GlobalSHDTest.h"
 
 #include <sstream>
 

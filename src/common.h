@@ -35,6 +35,11 @@
 #endif
 #include <glog/logging.h>
 
+#if defined(_MSC_VER)
+#undef __PRETTY_FUNCTION__
+#define __PRETTY_FUNCTION__ __FUNCTION__
+#endif
+
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
 #include <boost/regex.hpp>
